@@ -13,6 +13,12 @@ namespace Dialogue
             {
                 OpenDialogue();
             }
+            
+            // 若挂载对象名为“NPC3”的时候，按下B键开启对话
+            if (gameObject.name == "NPC3" && Input.GetKeyDown(KeyCode.B))
+            {
+                OpenDialogue();
+            }
         }
         
         private void OnTriggerEnter(Collider other)
