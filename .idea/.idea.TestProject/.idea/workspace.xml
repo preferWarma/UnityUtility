@@ -3,117 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e0faf62c-2605-4a5a-948c-5d270fd13dd0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TestProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TestProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N000.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N000.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N001.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N001.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N002.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N002.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N003.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N003.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N004.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N004.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N005.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N005.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N006.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N006.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N007.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N007.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N008.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N008.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N009.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N009.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N010.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N010.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N011.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N011.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N012.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N012.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N013.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N013.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N014.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N014.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N015.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N015.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N016.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N016.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N017.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N017.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N018.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N018.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N019.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/N019.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/UI_001.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/UI_001.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/UI_002.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/UI_002.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/image/2.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/image/2.jpg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/image/lcP69fCIZH.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/image/lcP69fCIZH.jpg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/material.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/material/New Material.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Art/material/New Material.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/New Terrain.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/New Terrain.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SO_Data/Dialogue1.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SO_Data/Dialogue1.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SO_Data/Dialogue2.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/SO_Data/Dialogue2.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scene.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scene/SampleScene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scene/SampleScene.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scene/SampleSceneSettings.lighting" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scene/SampleSceneSettings.lighting.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Homework.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Homework.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Automate/DialogueDataGenerate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Automate/DialogueDataGenerate.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Automate/ExcelReader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Automate/ExcelReader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dialogue/BaseDialogueController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Dialogue/BaseDialogueController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dialogue/DialogueController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Dialogue/DialogueController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Homework.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Homework/Coin.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Homework/Coin.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Homework/FirstPersonController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Homework/FirstPersonController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Homework/Inventory.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Homework/Inventory.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/3rd Person Controller.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/3rd Person Controller.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/First Person Controller.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/First Person Controller.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/PrototypeCharacter.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/PrototypeCharacter/Constructor.FBX" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/PrototypeCharacter/Constructor.FBX.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/PrototypeCharacter/Materials.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/PrototypeCharacter/Materials/constructor_done.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/PrototypeCharacter/Materials/constructor_done.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/PrototypeCharacter/Textures.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/PrototypeCharacter/Textures/constructor_diffuse.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/PrototypeCharacter/Textures/constructor_diffuse.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/PrototypeCharacter/Textures/constructor_normals.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/PrototypeCharacter/Textures/constructor_normals.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/Scripts.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/Scripts/CharacterMotor.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/Scripts/CharacterMotor.js.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/Scripts/FPSInputController.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/Scripts/FPSInputController.js.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/Scripts/MouseLook.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/Scripts/MouseLook.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/Scripts/PlatformInputController.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/Scripts/PlatformInputController.js.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/Scripts/ThirdPersonCamera.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/Scripts/ThirdPersonCamera.js.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/Scripts/ThirdPersonController.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Character Controllers/Sources/Scripts/ThirdPersonController.js.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,24 +23,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Discover.Launch.Via.Unity": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "XThreadsFramesViewSplitterKey": "0.4606526",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Discover.Launch.Via.Unity&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;XThreadsFramesViewSplitterKey&quot;: &quot;0.4606526&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\2961884371\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache",
-      "C:\\Users\\2961884371\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache",
-      "C:\\Users\\2961884371\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\2961884371\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\2961884371\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\2961884371\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="D:\Unity\Editor\2021.3.18f1c1\Editor\Unity.exe" />
@@ -178,10 +68,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="3836">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="3836" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -206,6 +96,7 @@
       <workItem from="1678715193634" duration="1082000" />
       <workItem from="1679061957527" duration="5723000" />
       <workItem from="1679926994670" duration="3955000" />
+      <workItem from="1680271391118" duration="10071000" />
     </task>
     <servers />
   </component>
