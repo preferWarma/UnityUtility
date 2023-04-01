@@ -22,6 +22,31 @@ namespace SaveSystem
 
     public static class SaveManager
     {
+        public static void Save(ISaveable saveable, SaveType saveType)
+        {
+            if (saveType == SaveType.PlayerPrefabs)
+            {
+                (saveable as ISaveWithPlayerPrefs)?.SaveWithPlayerPrefs();
+            }
+            if (saveType == SaveType.Json)
+            {
+                (saveable as ISaveWithJson)?.SaveWithJson();
+            }
+
+        }
+        
+        public static void Load(ISaveable saveable, SaveType saveType)
+        {
+            if (saveType == SaveType.PlayerPrefabs)
+            {
+                (saveable as ISaveWithPlayerPrefs)?.LoadWithPlayerPrefs();
+            }
+            if (saveType == SaveType.Json)
+            {
+                (saveable as ISaveWithJson)?.LoadWithJson();
+            }
+        }
+
         #region Use PlayerPrefs
         public static void SaveWithPlayerPrefs(string key ,object data)
         {
@@ -64,6 +89,12 @@ namespace SaveSystem
         }
         
         #endregion
+    }
+
+    public enum SaveType
+    {
+        PlayerPrefabs,
+        Json
     }
     
     

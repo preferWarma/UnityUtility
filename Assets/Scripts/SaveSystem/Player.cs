@@ -1,23 +1,21 @@
-﻿using UnityEditor;
-using UnityEngine;
-
+﻿using UnityEngine;
 // ReSharper disable Unity.InefficientPropertyAccess
 
 namespace SaveSystem
 {
     public class PlayerData
     {
-        public string PlayName = "Player";
-        public int Level = 1;
-        public int Score = 0;
-        public Vector3 Position = Vector3.zero;
+        public string PlayName;
+        public int Level;
+        public int Score;
+        public Vector3 Position;
     }
     
     public class Player : MonoBehaviour,ISaveWithJson,ISaveWithPlayerPrefs
     {
-        [SerializeField] public string playName = "Player";
-        [SerializeField] public int level = 1;
-        [SerializeField] public int score = 0;
+        [SerializeField] private string playName = "Player";
+        [SerializeField] private int level;
+        [SerializeField] private int score;
 
         public string Name => playName;
         public int Level => level;
@@ -26,14 +24,14 @@ namespace SaveSystem
         
         public void SaveData()
         {
-            // SaveWithPlayerPrefs();
-            SaveWithJson();
+            SaveManager.Save(this, SaveType.Json);
+            // 或 SaveManager.Save(this, SaveType.PlayerPrefabs);
         }
         
         public void LoadData()
         {
-            // LoadWithPlayerPrefs();
-            LoadWithJson();
+            SaveManager.Load(this, SaveType.Json);
+            // 或 SaveManager.Load(this, SaveType.PlayerPrefabs);
         }
 
         #region Use PlayerPrefs

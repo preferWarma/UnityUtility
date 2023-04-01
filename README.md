@@ -1,6 +1,8 @@
 # 说明文档
 
-## 1.数据生成
+## (一) 对话系统
+
+### 1.数据生成
 
 该dialogue system提供了数据生成的快捷脚本DialogueDataGenerate.cs
 
@@ -8,19 +10,19 @@
 
 该脚本的源码如下：
 
-![image-20230312225039290](README.assets/image-20230312225039290.png)
+![image-20230401232254447](README.assets/image-20230401232254447.png)
 
 其中assetPath为数据的生成位置, filePath为要读取的Excel表数据
 
-在确定你的生成路径和读取路径后，你可以在Unity中这样使用该生成方法：点击Tool下的“Generate allDialougueData”选项即可
+在确定你的生成路径和读取路径后，你可以在Unity中这样使用该生成方法：点击Tool下的“Generate DialougueData”选项即可
 
-![image-20230312225234712](README.assets/image-20230312225234712.png)
+![image-20230401232949614](README.assets/image-20230401232949614.png)
 
 对话数据会以ScriptableObject的形式保存
 
 ![image-20230312225359085](README.assets/image-20230312225359085.png)
 
-## 2.对话系统使用
+### 2.对话系统使用
 
 对话系统的主要组成如下:
 
@@ -31,6 +33,8 @@
 ### BaseDialogueController.cs
 
 - 作为DialogueController的基类，为子类提供存放对话数据的属性接口和通过自身对话数据开启对话的方法接口
+
+![image-20230401232029192](README.assets/image-20230401232029192.png)
 
 ### DialogueController.cs
 
@@ -66,7 +70,7 @@
 
 ![image-20230312233103745](README.assets/image-20230312233103745.png)
 
-篇幅有限，每个方法的具体实现不予说明，有兴趣可以查看源码，含有详细注释，下面给出测试用的挂载信息
+篇幅有限，每个方法的具体实现不予说明，可以查看源码，含有详细注释，下面给出测试用的挂载信息
 
 【注】对话信息这一栏无需填写，DialogueController会自动为它赋值的
 
@@ -77,3 +81,97 @@
 - 单条对话数据，成员变量和Excel表的每一列一一对应
 
 ![image-20230327234642115](README.assets/image-20230327234642115.png)
+
+
+
+## (二) 存档系统
+
+### 1.存档模式接口
+
+- ISaveable接口, 作为ISaveWithPlayerPrefabs和ISaveWithJson的基类接口
+
+  ```C#
+  public interface ISaveable { }
+  ```
+
+- ISaveWithPlayerPrefabs接口, 如果你希望使用Unity提供的PlayerPrefabs的来存档,使需要保存的数据继承这个接口即可
+
+  ```C#
+  public interface ISaveWithPlayerPrefs : ISaveable
+  {
+      string SAVE_KEY { get; }	// 保存的键
+      void SaveWithPlayerPrefs();
+      void LoadWithPlayerPrefs();
+  }
+  ```
+
+  
+
+- ISaveWithJson接口, 如果你希望使用Json文件来存档,使需要保存的数据继承这个接口即可
+
+  ```C#
+  public interface ISaveWithJson : ISaveable
+  {
+      string SAVE_FILE_NAME { get; }	// 存档文件名
+      void SaveWithJson();
+      void LoadWithJson();
+  }
+  ```
+
+  
+
+- 枚举类,用于标记保存方法
+
+  ```C#
+  public enum SaveType
+  {
+      PlayerPrefabs,
+      Json
+  }
+  ```
+
+### 2.存档系统使用
+
+在SaveManager.cs中实现了对Object的泛型Save和Load方法,分别对应PlayerPrefabs和Json两种实现
+
+- Use PLayerPrefabs
+
+![image-20230401234108860](README.assets/image-20230401234108860.png)
+
+- Use Json
+
+![image-20230401234220309](README.assets/image-20230401234220309.png)
+
+SaveManager设置为静态类,对于继承于上述接口的类,开放直接调用的Load和Save函数接口来保存数据
+
+例如现有一个Player类继承于ISaveWithJson,可以直接这样来调用:
+
+![image-20230402000532778](README.assets/image-20230402000532778.png)
+
+
+
+#### 具体使用案例
+
+创建一个PlayerData类作为当前需要保存的信息类
+
+![image-20230401234640928](README.assets/image-20230401234640928.png)
+
+创建一个Player继承ISaveWithJson,ISaveWithPlayerPrefabs,实现对应的方法
+
+- 当前类的属性
+
+![image-20230402000711745](README.assets/image-20230402000711745.png)
+
+- 对应接口的实现方法,即设置需要保存和加载的信息, 使用SaveManager提供的函数接口来保存对应数据
+
+  - ISaveWithPlayerPrefabs
+
+  ![image-20230402000914706](README.assets/image-20230402000914706.png)
+
+  - ISaveWithJson
+
+  ![image-20230402001053487](README.assets/image-20230402001053487.png)
+
+实现这些接口方法后即可使用SaveManager提供的Save和Load方法来一键保存和加载数据了
+
+![image-20230402001305643](README.assets/image-20230402001305643.png)
