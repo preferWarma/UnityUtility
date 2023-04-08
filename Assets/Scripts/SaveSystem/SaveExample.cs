@@ -11,7 +11,7 @@ namespace SaveSystem
         public Vector3 Position;
     }
     
-    public class Player : MonoBehaviour,ISaveWithJson,ISaveWithPlayerPrefs
+    public class SaveExample : MonoBehaviour,ISaveWithJson,ISaveWithPlayerPrefs
     {
         [SerializeField] private string playName = "Player";
         [SerializeField] private int level;
@@ -48,7 +48,6 @@ namespace SaveSystem
                 Position = transform.position
             };
             SaveManager.SaveWithPlayerPrefs(SAVE_KEY, saveData);
-            PlayerPrefs.Save();
         }
 
         public void LoadWithPlayerPrefs()
