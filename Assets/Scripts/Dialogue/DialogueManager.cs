@@ -1,13 +1,13 @@
 ﻿using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using Utils;
+using Utils.Singleton;
 using Utils.Extension;
 using DG.Tweening;
 
 namespace Dialogue
 {
-    public class DialogueManager :　Singleton<DialogueManager>
+    public class DialogueManager :　GlobalSingleton<DialogueManager>
     {
         [Header("数据集")]
         [Label("对话人物图片集")] public Sprite[] sprites; // 对话人物图片集

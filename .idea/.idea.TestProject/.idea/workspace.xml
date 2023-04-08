@@ -1,33 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e0faf62c-2605-4a5a-948c-5d270fd13dd0" name="Changes" comment="">
+    <list default="true" id="e0faf62c-2605-4a5a-948c-5d270fd13dd0" name="Changes" comment="添加可视化窗口的控制脚本">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TestProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TestProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Automate/DialogueDataGenerate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Automate/DialogueDataGenerate.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Automate/ExcelReader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Automate/ExcelReader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.assets/image-20230312225039290.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.assets/image-20230312225234712.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.assets/image-20230312225359085.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.assets/image-20230312225510934.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.assets/image-20230312230039908.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.assets/image-20230312230341340.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.assets/image-20230312231439671.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.assets/image-20230312231934018.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.assets/image-20230312233103745.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.assets/image-20230312234335552.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.assets/image-20230327234642115.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.assets/image-20230401232029192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.assets/image-20230401232254447.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.assets/image-20230401232949614.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.assets/image-20230401234108860.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.assets/image-20230401234220309.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.assets/image-20230401234640928.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.assets/image-20230402000532778.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.assets/image-20230402000711745.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.assets/image-20230402000914706.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.assets/image-20230402001053487.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.assets/image-20230402001305643.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/DialogueSystem.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DialogueSystem.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dialogue/BaseDialogueController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Dialogue/BaseDialogueController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dialogue/DialogueManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Dialogue/DialogueManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils/Singleton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Utils/MonoSingleton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils/Singleton.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Utils/MonoSingleton.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -124,8 +105,23 @@
       <workItem from="1680271391118" duration="10071000" />
       <workItem from="1680362325908" duration="3243000" />
       <workItem from="1680578231519" duration="510000" />
-      <workItem from="1680962309755" duration="2499000" />
+      <workItem from="1680962309755" duration="5714000" />
     </task>
+    <task id="LOCAL-00001" summary="1. 增加了图形化界面来修改读取路径和保存路径&#10;2. 优化了命名保存的数据结构,由list改为array,减少内存开销">
+      <created>1680965006095</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1680965006095</updated>
+    </task>
+    <task id="LOCAL-00002" summary="添加可视化窗口的控制脚本">
+      <created>1680965064062</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1680965064062</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -147,5 +143,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="1. 增加了图形化界面来修改读取路径和保存路径&#10;2. 优化了命名保存的数据结构,由list改为array,减少内存开销" />
+    <MESSAGE value="添加可视化窗口的控制脚本" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加可视化窗口的控制脚本" />
   </component>
 </project>

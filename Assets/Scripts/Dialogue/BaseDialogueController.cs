@@ -11,8 +11,8 @@ namespace Dialogue
         /// </summary>
         protected void OpenDialogue()
         {
-            var dialogueCanvas = FindObjectOfType<DialogueManager>().transform.gameObject; // 获取对话管理器
-            var dialoguePanel = dialogueCanvas.transform.Find("DialoguePanel");    // 获取对话面板
+            var dialogueCanvas = FindObjectOfType<DialogueManager>().transform.Find("DialogueCanvas");    // 获取对话画布
+            var dialoguePanel = dialogueCanvas.Find("DialoguePanel");    // 获取对话面板
             if (!dialoguePanel)
                 throw new MissingReferenceException("找不到对话面板");
             dialoguePanel.gameObject.SetActive(true);   // 打开对话面板
