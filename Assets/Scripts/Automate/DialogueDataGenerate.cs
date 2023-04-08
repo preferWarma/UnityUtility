@@ -7,14 +7,6 @@ namespace Automate
 {
     public class DialogueDataGenerate : MonoBehaviour
     {
-        [MenuItem("Tools/Generate DialogueData")]
-        public static void GenerateScriptableObject()
-        {
-            const string assetPath = "Assets/SO_Data/DialogueData";
-            const string filePath = "C:\\Users\\2961884371\\Desktop\\对话表格.xlsx";
-            GenerateScriptableObject(filePath, assetPath);
-        }
-        
         /// <summary>
         /// 对外开放生成数据的函数接口, 传入Excel文件路径和ScriptableObject存放路径
         /// </summary>

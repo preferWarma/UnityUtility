@@ -26,21 +26,28 @@ namespace Automate
             return result.Tables[idx];
         }
         
-        private static IEnumerable<DataTable> LoadExcel(string filePath, out List<string> sheetName)
+        /// <summary>
+        /// 读取Excel文件, 以DataTable列表的形式返回所有的sheet的数据, 并以out 字符串列表保存所有的sheet名字
+        /// </summary>
+        /// <param name="filePath"> Excel 文件路径</param>
+        /// <param name="sheetName"> 工作表名</param>
+        /// <returns></returns>
+        public static IEnumerable<DataTable> LoadExcel(string filePath, out string[] sheetName)
         {
             using var stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
             using var reader = ExcelReaderFactory.CreateReader(stream);
-            var names = new List<string>();
             // 将Excel文件转换为DataTable
             var result = reader.AsDataSet(new ExcelDataSetConfiguration
             {
                 ConfigureDataTable = _ => new ExcelDataTableConfiguration { UseHeaderRow = true }
             });
+            var names = new string[result.Tables.Count];  // 保存所有的sheet名字列表
+            
             List<DataTable> res = new();
             for (var i = 0; i < result.Tables.Count; i++)
             {
                 res.Add(result.Tables[i]);
-                names.Add(new string(result.Tables[i].TableName));
+                names[i] = result.Tables[i].TableName;
             }
 
             sheetName = names;  // 保存所有的sheet名字列表
@@ -96,8 +103,9 @@ namespace Automate
         /// 读取Excel文件，返回PieceData的嵌套表结构
         /// </summary>
         /// <param name="filePath"> Excel文件路径</param>
+        /// <param name="sheetNames"> Excel工作表名字</param>
         /// <returns></returns>
-        public static List<List<PieceData>> LoadPieceDataSheets(string filePath, out List<string> sheetNames)
+        public static List<List<PieceData>> LoadPieceDataSheets(string filePath, out string[] sheetNames)
         {
             var dataTables = LoadExcel(filePath, out sheetNames);
             return dataTables.Select(ConvertToPieceDataList).ToList();
