@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e0faf62c-2605-4a5a-948c-5d270fd13dd0" name="Changes" comment="添加可视化窗口的控制脚本">
+    <list default="true" id="e0faf62c-2605-4a5a-948c-5d270fd13dd0" name="Changes" comment="修改描述">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPool.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/IPool.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/IPool.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/IPoolObj.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/IPoolObj.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/ObjectPool.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/ObjectPool.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/ObjectPoolManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/ObjectPoolManager.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/PoolSetting.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/PoolSetting.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TestProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TestProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/DialogueSystem.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/DialogueSystem.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dialogue/BaseDialogueController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Dialogue/BaseDialogueController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dialogue/DialogueManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Dialogue/DialogueManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils/Singleton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Utils/MonoSingleton.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils/Singleton.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Utils/MonoSingleton.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +23,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1f66344f2f89470293d8b67d71308c0746a800/8a/60392e39/String.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/cc929abaf75b405689344e9f2a5a9643820200/ca/466c9748/EditorApplication.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://E:/UintyProjects/TestProject/Assets/Scripts/Dialogue/BaseDialogueController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/UIBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -105,7 +111,7 @@
       <workItem from="1680271391118" duration="10071000" />
       <workItem from="1680362325908" duration="3243000" />
       <workItem from="1680578231519" duration="510000" />
-      <workItem from="1680962309755" duration="5714000" />
+      <workItem from="1680962309755" duration="7123000" />
     </task>
     <task id="LOCAL-00001" summary="1. 增加了图形化界面来修改读取路径和保存路径&#10;2. 优化了命名保存的数据结构,由list改为array,减少内存开销">
       <created>1680965006095</created>
@@ -121,7 +127,21 @@
       <option name="project" value="LOCAL" />
       <updated>1680965064062</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="增加单例工具包,修改对话系统中查找DialogueCanvas的方法">
+      <created>1680968286115</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1680968286115</updated>
+    </task>
+    <task id="LOCAL-00004" summary="修改描述">
+      <created>1680968503287</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1680968503287</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,6 +165,8 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="1. 增加了图形化界面来修改读取路径和保存路径&#10;2. 优化了命名保存的数据结构,由list改为array,减少内存开销" />
     <MESSAGE value="添加可视化窗口的控制脚本" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加可视化窗口的控制脚本" />
+    <MESSAGE value="增加单例工具包,修改对话系统中查找DialogueCanvas的方法" />
+    <MESSAGE value="修改描述" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改描述" />
   </component>
 </project>
