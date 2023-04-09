@@ -13,7 +13,7 @@ namespace Automate
     public static class ExcelReader
     {
         //读取Excel文件
-        private static DataTable LoadExcel(string filePath, int idx, out string sheetName)
+        private static DataTable LoadExcel(string filePath, int idx)
         {
             using var stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
             using var reader = ExcelReaderFactory.CreateReader(stream);
@@ -22,7 +22,6 @@ namespace Automate
             {
                 ConfigureDataTable = _ => new ExcelDataTableConfiguration { UseHeaderRow = true }
             });
-            sheetName = result.Tables[idx].TableName;   // 保存当前sheet名字
             return result.Tables[idx];
         }
         
@@ -30,9 +29,8 @@ namespace Automate
         /// 读取Excel文件, 以DataTable列表的形式返回所有的sheet的数据, 并以out 字符串列表保存所有的sheet名字
         /// </summary>
         /// <param name="filePath"> Excel 文件路径</param>
-        /// <param name="sheetName"> 工作表名</param>
         /// <returns></returns>
-        public static IEnumerable<DataTable> LoadExcel(string filePath, out string[] sheetName)
+        public static IEnumerable<DataTable> LoadExcel(string filePath)
         {
             using var stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
             using var reader = ExcelReaderFactory.CreateReader(stream);
@@ -41,16 +39,11 @@ namespace Automate
             {
                 ConfigureDataTable = _ => new ExcelDataTableConfiguration { UseHeaderRow = true }
             });
-            var names = new string[result.Tables.Count];  // 保存所有的sheet名字列表
-            
-            List<DataTable> res = new();
+            var res = new DataTable[result.Tables.Count];
             for (var i = 0; i < result.Tables.Count; i++)
             {
-                res.Add(result.Tables[i]);
-                names[i] = result.Tables[i].TableName;
+                res[i] = result.Tables[i];
             }
-
-            sheetName = names;  // 保存所有的sheet名字列表
             return res;
         }
 
@@ -95,7 +88,8 @@ namespace Automate
         /// <returns></returns>
         public static List<PieceData> LoadPieceDataSheet(string filePath, int tableIdx, out string sheetName)
         {
-            var dataTable = LoadExcel(filePath, tableIdx, out sheetName);
+            var dataTable = LoadExcel(filePath, tableIdx);
+            sheetName = dataTable.TableName;
             return ConvertToPieceDataList(dataTable);
         }
 
@@ -107,7 +101,13 @@ namespace Automate
         /// <returns></returns>
         public static List<List<PieceData>> LoadPieceDataSheets(string filePath, out string[] sheetNames)
         {
-            var dataTables = LoadExcel(filePath, out sheetNames);
+            var dataTables = LoadExcel(filePath).ToArray();
+            var names = new string[dataTables.Length];
+            for (var i = 0; i < dataTables.Length; i++)
+            {
+                names[i] = dataTables.ElementAt(i).TableName;
+            }
+            sheetNames = names;
             return dataTables.Select(ConvertToPieceDataList).ToList();
         }
 
