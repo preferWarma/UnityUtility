@@ -7,7 +7,7 @@ namespace ObjectPool
     public class ObjectPool : Singleton<ObjectPool>
     {
         private readonly Dictionary<string, Queue<GameObject>> _objectPools = new(); // key: prefab 名字, value: prefabs对应的对象池
-        private readonly Dictionary<string, int> _poolMaxCountDic = new(); // key: prefab 名字, value: prefabs对应的对象池的最大数量
+        private readonly Dictionary<string, int> _poolMaxCountDic = new(); // key: prefab 名字, value: prefabs对应的对象池的当前最大数量
         private GameObject _parentPool;   // 所有对象池的父物体
 
         /// <summary>
@@ -64,22 +64,78 @@ namespace ObjectPool
                     Recycle(obj);
                 }
                 _poolMaxCountDic.Add(prefab.name, 10);
-                Debug.Log("初始容量设置为 10");
+                Debug.Log($"已创建{prefab.name}Pool对象池, 初始容量设置为 10");
             }
 
             else // 存在对象池则二倍扩容
             {
-                for (var i = 0; i < _poolMaxCountDic[prefab.name]; i++)
+                if (_poolMaxCountDic[prefab.name] == 0) // 如果之前清空了该对象池,则首次填充的时候,容量设置为 10
                 {
-                    var obj = Object.Instantiate(prefab, parent, true);
-                    Recycle(obj);
+                    _poolMaxCountDic[prefab.name] = 10;
+                    for (var i = 0; i < _poolMaxCountDic[prefab.name]; i++)
+                    {
+                        var obj = Object.Instantiate(prefab, parent, true);
+                        Recycle(obj);
+                    }
+                    Debug.Log($"已重新初始化{prefab.name}Pool对象池, 当前容量为 10");
                 }
-                _poolMaxCountDic[prefab.name] *= 2;
-                Debug.Log("二倍扩容");
+                else
+                {
+                    for (var i = 0; i < _poolMaxCountDic[prefab.name]; i++)
+                    {
+                        var obj = Object.Instantiate(prefab, parent, true);
+                        Recycle(obj);
+                    }
+                    _poolMaxCountDic[prefab.name] *= 2;
+                    Debug.Log($"已扩容{prefab.name}Pool对象池, 当前容量为 {_poolMaxCountDic[prefab.name]}");
+                }
             }
 
         }
         
-        //TODO 清空对象池
+        /// <summary>
+        /// 清空指定对象池中的对象
+        /// </summary>
+        /// <param name="prefabName"> 对象名 </param>
+        /// <param name="containActive"> 是否清空当前已经激活的对象 </param>
+        public void ClearPool(string prefabName, bool containActive = false)
+        {
+                if (_objectPools.ContainsKey(prefabName))
+                {
+                    var childPool = _parentPool.transform.Find(prefabName + "Pool");
+                    for (var i = 0; i < childPool.childCount; i++)
+                    {
+                        var child = childPool.GetChild(i);
+                        if (!child.gameObject.activeSelf)
+                        {
+                            Object.Destroy(child.gameObject);
+                            _poolMaxCountDic[prefabName]--;
+                        }
+                        else if (containActive)
+                        {
+                            Object.Destroy(child.gameObject);
+                            _poolMaxCountDic[prefabName]--;
+                        }
+                    }
+
+                    _objectPools[prefabName].Clear();
+                    Debug.Log(containActive ? $"已清空对象池 {prefabName}Pool中的全部对象" : $"已清空对象池 {prefabName}Pool中未激活的全部对象");
+                }
+            
+        }
+        
+        /// <summary>
+        /// 清空所有对象池中的对象
+        /// </summary>
+        /// <param name="containActive"> 是否清空当前已经激活的对象 </param>
+        public void ClearAllPool(bool containActive = false)
+        {
+            foreach (var pool in _objectPools)
+            {
+                ClearPool(pool.Key, containActive);
+            }
+
+            Debug.Log(containActive ? "已清空所有对象池中的全部对象" : "已清空所有对象池中未激活的全部对象");
+        }
     }
 }

@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e0faf62c-2605-4a5a-948c-5d270fd13dd0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TestProject/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TestProject/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TestProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TestProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Automate/ExcelReader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Automate/ExcelReader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/Example.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/Example.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/ObjectPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/ObjectPool.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -19,7 +18,6 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/1f66344f2f89470293d8b67d71308c0746a800/8a/60392e39/String.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/cc929abaf75b405689344e9f2a5a9643820200/ca/466c9748/EditorApplication.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://E:/UintyProjects/TestProject/Assets/Scripts/Dialogue/BaseDialogueController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/UIBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -107,7 +105,8 @@
       <workItem from="1680271391118" duration="10071000" />
       <workItem from="1680362325908" duration="3243000" />
       <workItem from="1680578231519" duration="510000" />
-      <workItem from="1680962309755" duration="15875000" />
+      <workItem from="1680962309755" duration="16029000" />
+      <workItem from="1681098860112" duration="3082000" />
     </task>
     <task id="LOCAL-00001" summary="1. 增加了图形化界面来修改读取路径和保存路径&#10;2. 优化了命名保存的数据结构,由list改为array,减少内存开销">
       <created>1680965006095</created>
@@ -144,7 +143,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680969811660</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="1. 优化Excel读取的内存消耗&#10;2. 新增加对象池工具包">
+      <created>1681055699928</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1681055699928</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -171,6 +177,7 @@
     <MESSAGE value="增加单例工具包,修改对话系统中查找DialogueCanvas的方法" />
     <MESSAGE value="修改描述" />
     <MESSAGE value="修改SaveSystem的描述" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改SaveSystem的描述" />
+    <MESSAGE value="1. 优化Excel读取的内存消耗&#10;2. 新增加对象池工具包" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. 优化Excel读取的内存消耗&#10;2. 新增加对象池工具包" />
   </component>
 </project>

@@ -25,6 +25,17 @@ namespace ObjectPool
                 var capsule = ObjectPool.Instance.Allocate(prefabs[2]);
                 capsule.transform.position = Vector3.zero;
             }
+            
+            // 按D回收全部Cube
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                ObjectPool.Instance.ClearPool(prefabs[0].name);
+            }
+            // 按E回收全部对象
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                ObjectPool.Instance.ClearAllPool(true);
+            }
         }
     }
 }
