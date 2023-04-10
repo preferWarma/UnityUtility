@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Utils.Singleton
+namespace Lyf.Utils.Singleton
 {
     /// <summary>
     /// 通用单例, 全局存在

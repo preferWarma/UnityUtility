@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Utils.Singleton
+namespace Lyf.Utils.Singleton
 {
     /// <summary>
     /// 全局单例, 一直存在, 切换场景时不会被销毁

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ObjectPool
+namespace Lyf.ObjectPool
 {
     public class Example : MonoBehaviour
     {

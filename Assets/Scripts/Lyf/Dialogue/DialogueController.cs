@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Dialogue
+namespace Lyf.Dialogue
 {
     // 基类含有属性currentDialogueData, 表示挂载该脚本的物体要传输对话内容信息
     // 基类含有方法OpenDialogue, 可以使用该脚本中的对话数据开启对话

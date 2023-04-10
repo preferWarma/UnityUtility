@@ -3,9 +3,52 @@
   <component name="ChangeListManager">
     <list default="true" id="e0faf62c-2605-4a5a-948c-5d270fd13dd0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.TestProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TestProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/Example.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/Example.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/ObjectPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/ObjectPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Automate.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Automate.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Automate/DialogueDataGenerate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Automate/DialogueDataGenerate.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Automate/DialogueDataGenerate.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Automate/DialogueDataGenerate.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Automate/Editor.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Automate/Editor.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Automate/Editor/OpenWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Automate/Editor/OpenWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Automate/Editor/OpenWindow.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Automate/Editor/OpenWindow.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Automate/ExcelReader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Automate/ExcelReader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Automate/ExcelReader.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Automate/ExcelReader.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dialogue.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Dialogue.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dialogue/BaseDialogueController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Dialogue/BaseDialogueController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dialogue/BaseDialogueController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Dialogue/BaseDialogueController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dialogue/DialogueController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Dialogue/DialogueController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dialogue/DialogueController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Dialogue/DialogueController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dialogue/DialogueData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Dialogue/DialogueData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dialogue/DialogueData.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Dialogue/DialogueData.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dialogue/DialogueManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Dialogue/DialogueManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dialogue/DialogueManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Dialogue/DialogueManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dialogue/PieceData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Dialogue/PieceData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dialogue/PieceData.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Dialogue/PieceData.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPool.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/ObjectPool.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/Example.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/ObjectPool/Example.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/Example.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/ObjectPool/Example.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/ObjectPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/ObjectPool/ObjectPool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ObjectPool/ObjectPool.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/ObjectPool/ObjectPool.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SaveSystem.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/SaveSystem.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/SaveExample.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/SaveSystem/SaveExample.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/SaveExample.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/SaveSystem/SaveExample.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/SaveManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/SaveSystem/SaveManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/SaveManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/SaveSystem/SaveManager.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/UIController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/SaveSystem/UIController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/UIController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/SaveSystem/UIController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Utils.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils/Extension.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Utils/Extension.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils/Extension/LabelAttribute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Utils/Extension/LabelAttribute.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils/Extension/LabelAttribute.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Utils/Extension/LabelAttribute.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils/Extension/LabelAttributeDrawer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Utils/Extension/LabelAttributeDrawer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils/Extension/LabelAttributeDrawer.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Utils/Extension/LabelAttributeDrawer.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils/Singleton.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Utils/Singleton.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils/Singleton/GlobalSingleton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Utils/Singleton/GlobalSingleton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils/Singleton/GlobalSingleton.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Utils/Singleton/GlobalSingleton.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils/Singleton/ISingleton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Utils/Singleton/ISingleton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils/Singleton/ISingleton.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Utils/Singleton/ISingleton.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils/Singleton/SceneSingleton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Utils/Singleton/SceneSingleton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils/Singleton/SceneSingleton.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Utils/Singleton/SceneSingleton.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils/Singleton/Singleton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Utils/Singleton/Singleton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils/Singleton/Singleton.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/Utils/Singleton/Singleton.cs.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +149,8 @@
       <workItem from="1680362325908" duration="3243000" />
       <workItem from="1680578231519" duration="510000" />
       <workItem from="1680962309755" duration="16029000" />
-      <workItem from="1681098860112" duration="3082000" />
+      <workItem from="1681098860112" duration="3257000" />
+      <workItem from="1681135719317" duration="790000" />
     </task>
     <task id="LOCAL-00001" summary="1. 增加了图形化界面来修改读取路径和保存路径&#10;2. 优化了命名保存的数据结构,由list改为array,减少内存开销">
       <created>1680965006095</created>
@@ -150,7 +194,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681055699928</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="为对象池添加清空功能,并修改填充函数的逻辑">
+      <created>1681102120518</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1681102120518</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,6 +229,7 @@
     <MESSAGE value="修改描述" />
     <MESSAGE value="修改SaveSystem的描述" />
     <MESSAGE value="1. 优化Excel读取的内存消耗&#10;2. 新增加对象池工具包" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. 优化Excel读取的内存消耗&#10;2. 新增加对象池工具包" />
+    <MESSAGE value="为对象池添加清空功能,并修改填充函数的逻辑" />
+    <option name="LAST_COMMIT_MESSAGE" value="为对象池添加清空功能,并修改填充函数的逻辑" />
   </component>
 </project>

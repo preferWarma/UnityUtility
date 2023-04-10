@@ -1,11 +1,11 @@
 ﻿using System.Linq;
+using DG.Tweening;
+using Lyf.Utils.Extension;
+using Lyf.Utils.Singleton;
 using UnityEngine;
 using UnityEngine.UI;
-using Utils.Singleton;
-using Utils.Extension;
-using DG.Tweening;
 
-namespace Dialogue
+namespace Lyf.Dialogue
 {
     public class DialogueManager :　GlobalSingleton<DialogueManager>
     {

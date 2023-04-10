@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Utils.Extension
+namespace Lyf.Utils.Extension
 {
     public class LabelAttribute : PropertyAttribute
     {

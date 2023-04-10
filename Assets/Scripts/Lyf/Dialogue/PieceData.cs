@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Dialogue
+namespace Lyf.Dialogue
 {
     [Serializable]
     public class PieceData

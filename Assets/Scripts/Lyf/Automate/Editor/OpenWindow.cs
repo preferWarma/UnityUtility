@@ -1,7 +1,8 @@
 ﻿using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
 
-namespace Automate.Editor
+namespace Lyf.Automate.Editor
 {
     public class OpenWindow : EditorWindow
     {
@@ -36,3 +37,4 @@ namespace Automate.Editor
         }
     }
 }
+#endif

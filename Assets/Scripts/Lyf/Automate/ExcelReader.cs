@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using Dialogue;
-using UnityEngine;
 using ExcelDataReader;
+using Lyf.Dialogue;
+using UnityEngine;
 
-
-namespace Automate
+namespace Lyf.Automate
 {
     public static class ExcelReader
     {

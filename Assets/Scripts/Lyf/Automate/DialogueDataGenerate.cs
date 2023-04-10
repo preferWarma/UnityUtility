@@ -1,9 +1,9 @@
 ﻿using System.IO;
-using Dialogue;
+using Lyf.Dialogue;
 using UnityEditor;
 using UnityEngine;
 
-namespace Automate
+namespace Lyf.Automate
 {
     public class DialogueDataGenerate : MonoBehaviour
     {

@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-namespace SaveSystem
+namespace Lyf.SaveSystem
 {
     public class UIController : MonoBehaviour
     {
-        [Header("Text")]
+        [Header("--Text--")]
         [SerializeField] private Text playerNameText;
         [SerializeField] private Text playerLevelText;
         [SerializeField] private Text playerScoreText;
@@ -14,7 +13,7 @@ namespace SaveSystem
         [SerializeField] private Text playerPositionYText;
         [SerializeField] private Text playerPositionZText;
         
-        [Header("--Player Data")]
+        [Header("--Player Data--")]
         [SerializeField] private SaveExample saveExample;
 
         [Header("--Button--")]

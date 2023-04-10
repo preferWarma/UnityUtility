@@ -2,7 +2,7 @@ using UnityEditor;
 using UnityEngine;
 
 #if UNITY_EDITOR
-namespace Utils.Extension
+namespace Lyf.Utils.Extension
 {
     [CustomPropertyDrawer(typeof(LabelAttribute))]
     public class LabelAttributeDrawer : PropertyDrawer

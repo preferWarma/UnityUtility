@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 // ReSharper disable Unity.InefficientPropertyAccess
 
-namespace SaveSystem
+namespace Lyf.SaveSystem
 {
     public class PlayerData
     {

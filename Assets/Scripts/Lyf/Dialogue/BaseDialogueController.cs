@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Dialogue
+namespace Lyf.Dialogue
 {
     public abstract class BaseDialogueController : MonoBehaviour
     {

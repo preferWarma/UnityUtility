@@ -2,7 +2,7 @@
 using UnityEngine;
 // ReSharper disable InconsistentNaming
 
-namespace SaveSystem
+namespace Lyf.SaveSystem
 {
     public interface ISaveable { }
     

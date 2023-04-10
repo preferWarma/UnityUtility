@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Dialogue
+namespace Lyf.Dialogue
 {
     [CreateAssetMenu(fileName = "NewScriptableObject", menuName = "ScriptableObjects/NewScriptableObject")]
     public class DialogueData : ScriptableObject

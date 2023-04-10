@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using Lyf.Utils.Singleton;
 using UnityEngine;
-using Utils.Singleton;
 
-namespace ObjectPool
+namespace Lyf.ObjectPool
 {
     public class ObjectPool : Singleton<ObjectPool>
     {

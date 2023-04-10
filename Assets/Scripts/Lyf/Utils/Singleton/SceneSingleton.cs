@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Utils.Singleton
+namespace Lyf.Utils.Singleton
 {
     /// <summary>
     /// 场景内单例, 切换场景时会被销毁
