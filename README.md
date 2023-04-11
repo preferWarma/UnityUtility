@@ -198,9 +198,9 @@ SaveManager设置为静态类,对于继承于上述接口的类,开放直接调�
    | 方法                                                         | 描述                                                         |
    | ------------------------------------------------------------ | ------------------------------------------------------------ |
    | GameObject **Allocate** (GameObject prefab)                  | 从对应的对象池拿出对象                                       |
-   | void **Recycle** (GameObject prefab)                         | 将对象回收到对应的对象池中                                   |
-   | void **ClearPool **(string prefabName, bool containActive = false) | 清空指定对象池中的对象, containActive为true时会销毁当前处于激活状态的对象 |
-   | void **ClearAllPool** (bool containActive = false)           | 清空所有对象池中的对象,containActive为true时会销毁当前处于激活状态的对象 |
+   | void **Recycle**  (GameObject prefab)                        | 将对象回收到对应的对象池中                                   |
+   | void **ClearPool ** (string prefabName, bool containActive = false) | 清空指定对象池中的对象, containActive为true时会销毁当前处于激活状态的对象 |
+   | void **ClearAllPool**  (bool containActive = false)          | 清空所有对象池中的对象,containActive为true时会销毁当前处于激活状态的对象 |
 
    
 
