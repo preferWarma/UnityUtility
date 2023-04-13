@@ -1,18 +1,19 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
+using Lyf.Utils.Singleton;
 using UnityEngine;
-// ReSharper disable InconsistentNaming
 
 namespace Lyf.SaveSystem
 {
     public interface ISaveable { }
-    
+
     public interface ISaveWithPlayerPrefs : ISaveable
     {
         string SAVE_KEY { get; }
         void SaveWithPlayerPrefs();
         void LoadWithPlayerPrefs();
     }
-    
+
     public interface ISaveWithJson : ISaveable
     {
         string SAVE_FILE_NAME { get; }
@@ -20,46 +21,134 @@ namespace Lyf.SaveSystem
         void LoadWithJson();
     }
 
-    public static class SaveManager
+    public class SaveManager : Singleton<SaveManager>
     {
+        private readonly List<ISaveWithPlayerPrefs> _prefs = new();
+        private readonly List<ISaveWithJson> _jsons = new();
+        
+        #region Save and Load
         public static void Save(ISaveable saveable, SaveType saveType)
         {
-            if (saveType == SaveType.PlayerPrefabs)
+            if (saveType == SaveType.PlayerPrefs)
             {
                 (saveable as ISaveWithPlayerPrefs)?.SaveWithPlayerPrefs();
             }
-            if (saveType == SaveType.Json)
+
+            else if (saveType == SaveType.Json)
             {
                 (saveable as ISaveWithJson)?.SaveWithJson();
             }
-
         }
-        
+
+        public void SaveAllRegister(SaveType saveType)
+        {
+            if (saveType == SaveType.PlayerPrefs)
+            {
+                foreach (var pref in _prefs)
+                {
+                    Save(pref, SaveType.PlayerPrefs);
+                }
+            }
+            else if (saveType == SaveType.Json)
+            {
+                foreach (var json in _jsons)
+                {
+                    Save(json, SaveType.Json);
+                }
+            }
+        }
+
         public static void Load(ISaveable saveable, SaveType saveType)
         {
-            if (saveType == SaveType.PlayerPrefabs)
+            if (saveType == SaveType.PlayerPrefs)
             {
                 (saveable as ISaveWithPlayerPrefs)?.LoadWithPlayerPrefs();
             }
-            if (saveType == SaveType.Json)
+
+            else if (saveType == SaveType.Json)
             {
                 (saveable as ISaveWithJson)?.LoadWithJson();
             }
         }
+        
+        public void LoadAllRegister(SaveType saveType)
+        {
+            if (saveType == SaveType.PlayerPrefs)
+            {
+                foreach (var pref in _prefs)
+                {
+                    Load(pref, SaveType.PlayerPrefs);
+                }
+            }
+            else if (saveType == SaveType.Json)
+            {
+                foreach (var json in _jsons)
+                {
+                    Load(json, SaveType.Json);
+                }
+            }
+        }
+        #endregion
+        
+        #region Register and UnRegister
+
+        public void Register(ISaveable saveable, SaveType type)
+        {
+            if (type == SaveType.PlayerPrefs)
+            {
+                if (saveable is not ISaveWithPlayerPrefs)
+                {
+                    Debug.LogError(" 保存类型错误，当前类不是 ISaveWithPlayerPrefs 类型, 无法注册");
+                }
+                _prefs.Add(saveable as ISaveWithPlayerPrefs);
+            }
+            else if (type == SaveType.Json)
+            {
+                if (saveable is not ISaveWithJson)
+                {
+                    Debug.LogError(" 保存类型错误，当前类不是 ISaveWithJson 类型, 无法注册");
+                }
+                _jsons.Add(saveable as ISaveWithJson);
+            }
+        }
+
+        public void UnRegister(ISaveable saveable, SaveType type)
+        {
+            if (type == SaveType.PlayerPrefs)
+            {
+                if (saveable is not ISaveWithPlayerPrefs)
+                {
+                    Debug.LogError(" 取消注册类型错误，当前类不是 ISaveWithPlayerPrefs 类型, 无法取消注册");
+                }
+                _prefs.Remove(saveable as ISaveWithPlayerPrefs);
+            }
+            else if (type == SaveType.Json)
+            {
+                if (saveable is not ISaveWithJson)
+                {
+                    Debug.LogError(" 取消注册类型错误，当前类不是 ISaveWithJson 类型, 无法取消注册");
+                }
+                _jsons.Remove(saveable as ISaveWithJson);
+            }
+        }
+
+        #endregion
 
         #region Use PlayerPrefs
-        public static void SaveWithPlayerPrefs(string key ,object data)
+
+        public static void SaveWithPlayerPrefs(string key, object data)
         {
             var jsonData = JsonUtility.ToJson(data, true);
             Debug.Log(jsonData);
             PlayerPrefs.SetString(key, jsonData);
             PlayerPrefs.Save();
         }
-        public static string LoadWithPlayerPrefs(string key)
+
+        public static T LoadWithPlayerPrefs<T>(string key)
         {
-            return PlayerPrefs.GetString(key);
+            return JsonUtility.FromJson<T>(PlayerPrefs.GetString(key));
         }
-        
+
         #endregion
 
         #region Use Json
@@ -73,7 +162,7 @@ namespace Lyf.SaveSystem
             Debug.Log("Save data to " + path);
 #endif
         }
-        
+
         public static T LoadWithJson<T>(string saveFileName)
         {
             var path = Path.Combine(Application.persistentDataPath, saveFileName);
@@ -87,15 +176,13 @@ namespace Lyf.SaveSystem
             var path = Path.Combine(Application.persistentDataPath, saveFileName);
             File.Delete(path);
         }
-        
+
         #endregion
     }
 
     public enum SaveType
     {
-        PlayerPrefabs,
+        PlayerPrefs,
         Json
     }
-    
-    
 }

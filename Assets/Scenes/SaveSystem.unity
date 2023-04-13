@@ -370,7 +370,7 @@ MonoBehaviour:
   playerPositionXText: {fileID: 50401100}
   playerPositionYText: {fileID: 875566729}
   playerPositionZText: {fileID: 456492999}
-  player: {fileID: 1900237716}
+  saveExample: {fileID: 1900237716}
   saveButton: {fileID: 1123535609}
   loadButton: {fileID: 684964416}
 --- !u!1 &456492997

@@ -1,6 +1,7 @@
 ﻿using System;
+// ReSharper disable InconsistentNaming
 
-namespace Lyf.BindableProperty
+namespace Lyf
 {
     // 来源: QFramework: 链接:https://qframework.cn
     public interface IUnRegister
@@ -30,7 +31,7 @@ namespace Lyf.BindableProperty
             mValue = defaultValue;
         }
 
-        protected T mValue;
+        private T mValue;
 
         public T Value
         {
@@ -60,7 +61,7 @@ namespace Lyf.BindableProperty
             mValue = newValue;
         }
 
-        private Action<T> mOnValueChanged = (v) => { };
+        private Action<T> mOnValueChanged = _ => { };
 
         public IUnRegister Register(Action<T> onValueChanged)
         {
