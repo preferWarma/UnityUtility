@@ -8,65 +8,64 @@ namespace Lyf.BindableProperty
         void UnRegister();
     }
     
-    public interface IReadonlyBindableProperty<T>
-        {
-            T Value { get; }
-            
-            IUnRegister RegisterWithInitValue(Action<T> action);
-            void UnRegister(Action<T> onValueChanged);
-            IUnRegister Register(Action<T> onValueChanged);
-        }
     public interface IBindableProperty<T> : IReadonlyBindableProperty<T>
     {
         new T Value { get; set; }
         void SetValueWithoutEvent(T newValue);
     }
 
-    
+    public interface IReadonlyBindableProperty<T>
+    {
+        T Value { get; }
+
+        IUnRegister RegisterWithInitValue(Action<T> action);
+        void UnRegister(Action<T> onValueChanged);
+        IUnRegister Register(Action<T> onValueChanged);
+    }
 
     public class BindableProperty<T> : IBindableProperty<T>
     {
         public BindableProperty(T defaultValue = default)
         {
-            _mValue = defaultValue;
+            mValue = defaultValue;
         }
 
-        private T _mValue;
+        protected T mValue;
 
         public T Value
         {
             get => GetValue();
             set
             {
-                if (value == null && _mValue == null) return;
-                if (value != null && value.Equals(_mValue)) return;
+                if (value == null && mValue == null) return;
+                if (value != null && value.Equals(mValue)) return;
 
                 SetValue(value);
-                _mOnValueChanged?.Invoke(value);
+                mOnValueChanged?.Invoke(value);
             }
         }
 
         protected virtual void SetValue(T newValue)
         {
-            _mValue = newValue;
+            mValue = newValue;
         }
 
         protected virtual T GetValue()
         {
-            return _mValue;
+            return mValue;
         }
 
         public void SetValueWithoutEvent(T newValue)
         {
-            _mValue = newValue;
+            mValue = newValue;
         }
 
-        private Action<T> _mOnValueChanged = _ => { };
+        private Action<T> mOnValueChanged = (v) => { };
 
         public IUnRegister Register(Action<T> onValueChanged)
         {
-            _mOnValueChanged += onValueChanged;
-            return new BindablePropertyUnRegister<T>
+            mOnValueChanged += onValueChanged;
+            return new BindablePropertyUnRegister<T>()
             {
                 BindableProperty = this,
                 OnValueChanged = onValueChanged
@@ -75,7 +74,7 @@ namespace Lyf.BindableProperty
 
         public IUnRegister RegisterWithInitValue(Action<T> onValueChanged)
         {
-            onValueChanged(_mValue);
+            onValueChanged(mValue);
             return Register(onValueChanged);
         }
 
@@ -91,7 +90,7 @@ namespace Lyf.BindableProperty
 
         public void UnRegister(Action<T> onValueChanged)
         {
-            _mOnValueChanged -= onValueChanged;
+            mOnValueChanged -= onValueChanged;
         }
     }
 
