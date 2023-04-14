@@ -8,11 +8,9 @@
 
 该dialogue system提供了数据生成的快捷脚本DialogueDataGenerate.cs
 
-***【注】使用该脚本需要使用.NET第三方库ExcelDataReader和ExcelDataReader.setdata***
+***【注】使用该脚本需要使用.NET第三方库ExcelDataReader和ExcelDataReader.DataSet***
 
-
-
- 在Unity中点击Lyf下的“Generate DialougueData”选项
+ 在Unity中点击Lyf下的“Generate DialogueData”选项
 
 ![image-20230413230753842](README.assets/image-20230413230753842.png)
 
@@ -325,14 +323,13 @@ public void LoadData()
 
 3. 对外提供如下方法
 
-   | 方法                                                         | 描述                                                         |
-   | ------------------------------------------------------------ | ------------------------------------------------------------ |
-   | public GameObject **Allocate** (GameObject prefab)           | 从对应的对象池拿出对象                                       |
-   | public void **Recycle**  (GameObject prefab)                 | 将对象回收到对应的对象池中                                   |
-   | public void **ClearPool** (string prefabName, bool containActive = false) | 清空指定对象池中的对象, containActive为true时会销毁当前处于激活状态的对象 |
-   | public void **ClearAllPool**  (bool containActive = false)   | 清空所有对象池中的对象,containActive为true时会销毁当前处于激活状态的对象 |
+| 方法                                                         | 描述                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| public GameObject **Allocate** (GameObject prefab)           | 从对应的对象池拿出对象                                       |
+| public void **Recycle**  (GameObject prefab)                 | 将对象回收到对应的对象池中                                   |
+| public void **ClearPool** (string prefabName, bool containActive = false) | 清空指定对象池中的对象, containActive为true时会销毁当前处于激活状态的对象 |
+| public void **ClearAllPool**  (bool containActive = false)   | 清空所有对象池中的对象,containActive为true时会销毁当前处于激活状态的对象 |
 
-   
 
 4. 在场景中创建的对象池系统层级结构如下: ParentPool为对象池父物体(自动生成), 为每类对象提供单独的对象池(自动创建),名为"${prefabs.name} + Pool"
 
