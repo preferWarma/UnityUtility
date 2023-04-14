@@ -42,11 +42,16 @@ namespace Lyf.SaveSystem
 
         public void SaveAllRegister(SaveType saveType)
         {
+            var flag = false;
+            var saveNum = 0;
+            
             if (saveType == SaveType.PlayerPrefs)
             {
                 foreach (var pref in _prefs)
                 {
                     Save(pref, SaveType.PlayerPrefs);
+                    flag = true;
+                    saveNum++;
                 }
             }
             else if (saveType == SaveType.Json)
@@ -54,8 +59,11 @@ namespace Lyf.SaveSystem
                 foreach (var json in _jsons)
                 {
                     Save(json, SaveType.Json);
+                    flag = true;
+                    saveNum++;
                 }
             }
+            Debug.Log(!flag ? $"保存{saveNum}条数据, 当前没有可保存的数据" : $"成功保存{saveNum}条数据");
         }
 
         public static void Load(ISaveable saveable, SaveType saveType)
@@ -73,11 +81,16 @@ namespace Lyf.SaveSystem
         
         public void LoadAllRegister(SaveType saveType)
         {
+            var flag = false;
+            var loadNum = 0;
+            
             if (saveType == SaveType.PlayerPrefs)
             {
                 foreach (var pref in _prefs)
                 {
                     Load(pref, SaveType.PlayerPrefs);
+                    flag = true;
+                    loadNum++;
                 }
             }
             else if (saveType == SaveType.Json)
@@ -85,8 +98,11 @@ namespace Lyf.SaveSystem
                 foreach (var json in _jsons)
                 {
                     Load(json, SaveType.Json);
+                    flag = true;
+                    loadNum++;
                 }
             }
+            Debug.Log(!flag ? $"加载{loadNum}条数据, 当前没有可加载的数据" : $"成功加载{loadNum}条数据");
         }
         #endregion
         

@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e0faf62c-2605-4a5a-948c-5d270fd13dd0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TestProject/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TestProject/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SaveSystem.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SaveSystem.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Lyf/BindableProperty.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Lyf/BindableProperty/BindableProperty.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/BindableProperty.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Lyf/BindableProperty/BindableProperty.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/BindableProperty.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Lyf/SaveSystem/SaveExample.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/SaveSystem/SaveExample.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Lyf/SaveSystem/SaveManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Lyf/SaveSystem/SaveManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
-    </list>
+    <list default="true" id="e0faf62c-2605-4a5a-948c-5d270fd13dd0" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -118,7 +107,7 @@
       <workItem from="1681361467872" duration="715000" />
       <workItem from="1681391862469" duration="734000" />
       <workItem from="1681392956631" duration="451000" />
-      <workItem from="1681393568143" duration="7855000" />
+      <workItem from="1681393568143" duration="8449000" />
     </task>
     <task id="LOCAL-00001" summary="1. 增加了图形化界面来修改读取路径和保存路径&#10;2. 优化了命名保存的数据结构,由list改为array,减少内存开销">
       <created>1680965006095</created>
