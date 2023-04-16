@@ -172,7 +172,13 @@ public class DialogueController : BaseDialogueController
 
 ### 2.存档系统使用
 
-在SaveManager.cs中实现了对Object的泛型Save和Load静态方法,分别对应PlayerPrefabs和Json两种实现
+在SaveManager.cs中实现了对Object的泛型Save和Load静态方法,分别对应PlayerPrefabs和Json两种实现, 该存档系统的Json序列化基于Newtonsoft.Json库实现,支持对List和Dictionary的序列化和反序列化,同样支持自定义类型序列化方法和反序列化方法.
+
+SaveManager定义:
+
+```C#
+public class SaveManager : GlobalSingleton<SaveManager> // GlobalSingleton是场景内全局泛型单例类(详见后续的单例系统介绍)
+```
 
 - Use PLayerPrefabs
 
@@ -212,16 +218,16 @@ public class DialogueController : BaseDialogueController
 创建一个PlayerData类作为当前需要保存的信息类
 
 ```C#
+[Serializable]
 public class PlayerData
 {
-    public string PlayName;
-    public int Level;
-    public int Score;
-    public Vector3 Position;
+    public string playName;
+    public List<int> playerList;    // 测试List是否可以序列化(分别为Level, Score)
+    public Dictionary<string, Vector3> PlayerDict;  // 测试Dictionary是否可以序列化
 }
 ```
 
-创建一个Player继承ISaveWithJson,ISaveWithPlayerPrefabs,实现对应的方法
+创建一个Player继承ISaveWithJson, ISaveWithPlayerPrefs,实现对应的方法
 
 - 当前类的属性
 
@@ -238,10 +244,12 @@ public class PlayerData
   {
       var saveData = new PlayerData()
       {
-          PlayName = playName,
-          Level = level,
-          Score = score,
-          Position = transform.position
+          playName = playName,
+          playerList = new List<int> {level, score},
+          PlayerDict = new Dictionary<string, Vector3>
+          {
+              {playName, transform.position}
+          }
       };
       SaveManager.SaveWithPlayerPrefs(SAVE_KEY, saveData);
   }
@@ -249,10 +257,10 @@ public class PlayerData
   public void LoadWithPlayerPrefs()
   {
       var saveData = SaveManager.LoadWithPlayerPrefs<PlayerData>(SAVE_KEY);
-      playName = saveData.PlayName;
-      level = saveData.Level;
-      score = saveData.Score;
-      transform.position = saveData.Position;
+      playName = saveData.playName;
+      level = saveData.playerList[0];
+      score = saveData.playerList[1];
+      transform.position = saveData.PlayerDict[playName];
   }
   ```
   
@@ -263,12 +271,14 @@ public class PlayerData
   
   public void SaveWithJson()
   {
-      var saveData = new PlayerData()
+      var saveData = new PlayerData
       {
-          PlayName = playName,
-          Level = level,
-          Score = score,
-          Position = transform.position
+          playName = playName,
+          playerList = new List<int> {level, score},
+          PlayerDict = new Dictionary<string, Vector3>
+          {
+              {playName, transform.position}
+          }
       };
       SaveManager.SaveWithJson(SAVE_FILE_NAME, saveData);
   }
@@ -276,10 +286,10 @@ public class PlayerData
   public void LoadWithJson()
   {
       var saveData = SaveManager.LoadWithJson<PlayerData>(SAVE_FILE_NAME);
-      playName = saveData.PlayName;
-      level = saveData.Level;
-      score = saveData.Score;
-      transform.position = saveData.Position;
+      playName = saveData.playName;
+      level = saveData.playerList[0];
+      score = saveData.playerList[1];
+      transform.position = saveData.PlayerDict[playName];
   }
   ```
 
@@ -288,19 +298,26 @@ public class PlayerData
 ```C#
 private void Start()
 {
-    SaveManager.Instance.Register(this, SaveType.Json);	// 添加注册
+    SaveManager.Instance.Register(this, SaveType.Json);
 }
 
 public void SaveData()
 {
-    SaveManager.Instance.SaveAllRegister(SaveType.Json);
-    // 或者 SaveManager.Save(this, SaveType.Json);
+    SaveManager.Save(this, SaveType.Json);
+    // 或者 SaveManager.Save(this, SaveType.PlayerPrefs);
+    // 或者SaveManager.Instance.SaveAllRegister(SaveType.Json); (如果注册过)
 }
 
 public void LoadData()
 {
-    SaveManager.Instance.LoadAllRegister(SaveType.Json);
-    // 或者 SaveManager.Load(this, SaveType.Json);
+    SaveManager.Load(this, SaveType.Json);
+    // 或者SaveManager.Load(this, SaveType.PlayerPrefs);
+    // 或者SaveManager.Instance.LoadAllRegister(SaveType.Json); (如果注册过)
+}
+
+private void OnDestroy()
+{
+    SaveManager.Instance.UnRegister(this, SaveType.Json);
 }
 ```
 
