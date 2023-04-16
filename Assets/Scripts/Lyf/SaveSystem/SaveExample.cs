@@ -61,8 +61,7 @@ namespace Lyf.SaveSystem
                 PlayerDict = new Dictionary<string, Vector3>
                 {
                     {playName, transform.position}
-                },
-                
+                }
             };
             SaveManager.SaveWithPlayerPrefs(SAVE_KEY, saveData);
         }
