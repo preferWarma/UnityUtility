@@ -2,6 +2,7 @@
 using System.IO;
 using Lyf.Utils.Singleton;
 using UnityEngine;
+using Newtonsoft.Json;
 
 namespace Lyf.SaveSystem
 {
@@ -21,11 +22,16 @@ namespace Lyf.SaveSystem
         void LoadWithJson();
     }
 
-    public class SaveManager : Singleton<SaveManager>
+    public class SaveManager : GlobalSingleton<SaveManager>
     {
         private readonly List<ISaveWithPlayerPrefs> _prefs = new();
         private readonly List<ISaveWithJson> _jsons = new();
-        
+
+        private void Start()
+        {
+            AddSerializedJson.AddAllConverter();
+        }
+
         #region Save and Load
         public static void Save(ISaveable saveable, SaveType saveType)
         {
@@ -154,15 +160,17 @@ namespace Lyf.SaveSystem
 
         public static void SaveWithPlayerPrefs(string key, object data)
         {
-            var jsonData = JsonUtility.ToJson(data, true);
-            Debug.Log(jsonData);
+            var jsonData = JsonConvert.SerializeObject(data);   // 使用Newtonsoft.Json库, 支持序列化Dictionary和List
             PlayerPrefs.SetString(key, jsonData);
             PlayerPrefs.Save();
+#if UNITY_EDITOR
+            Debug.Log("Save data to PlayerPrefs");
+#endif
         }
 
         public static T LoadWithPlayerPrefs<T>(string key)
         {
-            return JsonUtility.FromJson<T>(PlayerPrefs.GetString(key));
+            return JsonConvert.DeserializeObject<T>(PlayerPrefs.GetString(key));  // 使用Newtonsoft.Json库, 支持反序列化Dictionary和List
         }
 
         #endregion
@@ -171,8 +179,10 @@ namespace Lyf.SaveSystem
 
         public static void SaveWithJson(string saveFileName, object data)
         {
-            var jsonData = JsonUtility.ToJson(data, true);
+            var jsonData = JsonConvert.SerializeObject(data);   // 使用Newtonsoft.Json库, 支持序列化Dictionary和List
             var path = Path.Combine(Application.persistentDataPath, saveFileName);
+            if (!path.EndsWith(".json"))
+                path += ".json";    // 保证文件后缀为json
             File.WriteAllText(path, jsonData);
 #if UNITY_EDITOR
             Debug.Log("Save data to " + path);
@@ -182,15 +192,22 @@ namespace Lyf.SaveSystem
         public static T LoadWithJson<T>(string saveFileName)
         {
             var path = Path.Combine(Application.persistentDataPath, saveFileName);
+            if (!File.Exists(path)) 
+                Debug.LogError("Save file not found in " + path);
+            if (!path.EndsWith(".json")) 
+                path += ".json";    // 保证文件后缀为json
+            
             var jsonData = File.ReadAllText(path);
-            var data = JsonUtility.FromJson<T>(jsonData);
-            return data;
+            return JsonConvert.DeserializeObject<T>(jsonData);  // 使用Newtonsoft.Json库, 支持反序列化Dictionary和List
         }
 
         public static void DeleteSaveFile(string saveFileName)
         {
             var path = Path.Combine(Application.persistentDataPath, saveFileName);
-            File.Delete(path);
+            if (!path.EndsWith(".json"))
+                path += ".json";    // 保证文件后缀为json
+            if (File.Exists(path))
+                File.Delete(path);
         }
 
         #endregion

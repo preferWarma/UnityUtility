@@ -1,14 +1,16 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine; 
 // ReSharper disable Unity.InefficientPropertyAccess
 
 namespace Lyf.SaveSystem
 {
+    [Serializable]
     public class PlayerData
     {
-        public string PlayName;
-        public int Level;
-        public int Score;
-        public Vector3 Position;
+        public string playName;
+        public List<int> playerList;    // 测试List是否可以序列化(分别为Level, Score)
+        public Dictionary<string, Vector3> PlayerDict;  // 测试Dictionary是否可以序列化
     }
 
     public class SaveExample : MonoBehaviour, ISaveWithJson, ISaveWithPlayerPrefs
@@ -29,14 +31,12 @@ namespace Lyf.SaveSystem
 
         public void SaveData()
         {
-            SaveManager.Instance.SaveAllRegister(SaveType.Json);
-            // 或者 SaveManager.Save(this, SaveType.Json);
+            SaveManager.Save(this, SaveType.PlayerPrefs);
         }
 
         public void LoadData()
         {
-            SaveManager.Instance.LoadAllRegister(SaveType.Json);
-            // 或者 SaveManager.Load(this, SaveType.Json);
+            SaveManager.Load(this, SaveType.PlayerPrefs);
         }
 
         #region Use PlayerPrefs
@@ -47,10 +47,13 @@ namespace Lyf.SaveSystem
         {
             var saveData = new PlayerData()
             {
-                PlayName = playName,
-                Level = level,
-                Score = score,
-                Position = transform.position
+                playName = playName,
+                playerList = new List<int> {level, score},
+                PlayerDict = new Dictionary<string, Vector3>
+                {
+                    {playName, transform.position}
+                },
+                
             };
             SaveManager.SaveWithPlayerPrefs(SAVE_KEY, saveData);
         }
@@ -58,10 +61,10 @@ namespace Lyf.SaveSystem
         public void LoadWithPlayerPrefs()
         {
             var saveData = SaveManager.LoadWithPlayerPrefs<PlayerData>(SAVE_KEY);
-            playName = saveData.PlayName;
-            level = saveData.Level;
-            score = saveData.Score;
-            transform.position = saveData.Position;
+            playName = saveData.playName;
+            level = saveData.playerList[0];
+            score = saveData.playerList[1];
+            transform.position = saveData.PlayerDict[playName];
         }
         #endregion
 
@@ -71,12 +74,14 @@ namespace Lyf.SaveSystem
 
         public void SaveWithJson()
         {
-            var saveData = new PlayerData()
+            var saveData = new PlayerData
             {
-                PlayName = playName,
-                Level = level,
-                Score = score,
-                Position = transform.position
+                playName = playName,
+                playerList = new List<int> {level, score},
+                PlayerDict = new Dictionary<string, Vector3>
+                {
+                    {playName, transform.position}
+                }
             };
             SaveManager.SaveWithJson(SAVE_FILE_NAME, saveData);
         }
@@ -84,10 +89,10 @@ namespace Lyf.SaveSystem
         public void LoadWithJson()
         {
             var saveData = SaveManager.LoadWithJson<PlayerData>(SAVE_FILE_NAME);
-            playName = saveData.PlayName;
-            level = saveData.Level;
-            score = saveData.Score;
-            transform.position = saveData.Position;
+            playName = saveData.playName;
+            level = saveData.playerList[0];
+            score = saveData.playerList[1];
+            transform.position = saveData.PlayerDict[playName];
         }
         #endregion
     }
