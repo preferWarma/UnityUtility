@@ -31,12 +31,16 @@ namespace Lyf.SaveSystem
 
         public void SaveData()
         {
-            SaveManager.Save(this, SaveType.PlayerPrefs);
+            SaveManager.Save(this, SaveType.Json);
+            // 或者 SaveManager.Save(this, SaveType.PlayerPrefs);
+            // 或者SaveManager.Instance.SaveAllRegister(SaveType.Json); (如果注册过)
         }
 
         public void LoadData()
         {
-            SaveManager.Load(this, SaveType.PlayerPrefs);
+            SaveManager.Load(this, SaveType.Json);
+            // 或者SaveManager.Load(this, SaveType.PlayerPrefs);
+            // 或者SaveManager.Instance.LoadAllRegister(SaveType.Json); (如果注册过)
         }
 
         #region Use PlayerPrefs
