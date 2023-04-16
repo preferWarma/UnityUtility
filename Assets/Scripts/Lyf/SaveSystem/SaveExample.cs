@@ -43,6 +43,11 @@ namespace Lyf.SaveSystem
             // 或者SaveManager.Instance.LoadAllRegister(SaveType.Json); (如果注册过)
         }
 
+        private void OnDestroy()
+        {
+            SaveManager.Instance.UnRegister(this, SaveType.Json);
+        }
+
         #region Use PlayerPrefs
 
         public string SAVE_KEY => "PlayerData";
