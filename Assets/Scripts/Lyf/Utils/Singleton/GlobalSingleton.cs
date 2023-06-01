@@ -4,11 +4,11 @@ using UnityEngine;
 namespace Lyf.Utils.Singleton
 {
     /// <summary>
-    /// 全局单例, 一直存在, 切换场景时不会被销毁
+    /// 全局单例, 一直存在, 切换场景时不会被销毁, 且保留第一个创建的实例
     /// </summary>
     public class GlobalSingleton<T> : MonoBehaviour, ISingleton, IDisposable where T : GlobalSingleton<T>
     {
-        private static readonly object Lock = typeof(T);
+        private static readonly object Lock = new();
         private static T _instance;
 
         public static T Instance
@@ -17,54 +17,47 @@ namespace Lyf.Utils.Singleton
             {
                 if (_instance == null)
                 {
-                    // 双重检查锁
                     lock (Lock)
                     {
                         if (_instance == null)
                         {
-                            _instance = FindObjectOfType<T>();  // 从场景中寻找一个T类型的组件
+                            _instance = FindObjectOfType<T>();
                             if (_instance == null)
                             {
-                                throw new Exception($"Can not find {typeof(T)} in scene");
+                                Debug.LogWarning($"Cannot find {typeof(T)} in scene, creating a new one.");
+                                GameObject obj = new GameObject(typeof(T).Name);
+                                _instance = obj.AddComponent<T>();
                             }
+                            DontDestroyOnLoad(_instance.gameObject);
                         }
-                    }// lock
-                    _instance.Awake();  // 如果在Awake前被访问 则 Awake将在此处调用一次
+                    }
                 }
+
                 return _instance;
             }
         }
 
-        protected void Awake()
+        protected virtual void Awake()
         {
             if (_instance == null)
             {
                 _instance = this as T;
-                DontDestroyOnLoad(gameObject);
             }
             else if (_instance != this)
             {
-                Destroy(gameObject);    //如果已经被访问过了 代表已经有一个对应的单例对象存在了 那么就会在Awake中销毁自己
+                Destroy(gameObject);
             }
         }
-        protected void OnEnable()
-        {
-            if (_instance == null)
-            {
-                _instance = this as T;
-                DontDestroyOnLoad(gameObject);
-            }
-        }
-        
-        protected void OnDestroy()
+
+        protected virtual void OnDestroy()
         {
             if (_instance == this)
             {
                 _instance = null;
             }
         }
-        
-        public void Dispose()
+
+        public virtual void Dispose()
         {
             if (_instance == this)
             {
@@ -73,4 +66,5 @@ namespace Lyf.Utils.Singleton
             }
         }
     }
+
 }

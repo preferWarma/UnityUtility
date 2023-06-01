@@ -26,7 +26,7 @@ namespace Lyf.SaveSystem
     {
         private readonly List<ISaveWithPlayerPrefs> _prefs = new();
         private readonly List<ISaveWithJson> _jsons = new();
-
+        
         private void Start()
         {
             AddSerializedJson.AddAllConverter();
@@ -122,6 +122,7 @@ namespace Lyf.SaveSystem
                 {
                     Debug.LogError(" 保存类型错误，当前类不是 ISaveWithPlayerPrefs 类型, 无法注册");
                 }
+                if (_prefs.Contains(saveable as ISaveWithPlayerPrefs)) return;
                 _prefs.Add(saveable as ISaveWithPlayerPrefs);
             }
             else if (type == SaveType.Json)
@@ -130,6 +131,7 @@ namespace Lyf.SaveSystem
                 {
                     Debug.LogError(" 保存类型错误，当前类不是 ISaveWithJson 类型, 无法注册");
                 }
+                if (_jsons.Contains(saveable as ISaveWithJson)) return;
                 _jsons.Add(saveable as ISaveWithJson);
             }
         }
@@ -192,15 +194,15 @@ namespace Lyf.SaveSystem
         public static T LoadWithJson<T>(string saveFileName)
         {
             var path = Path.Combine(Application.persistentDataPath, saveFileName);
-            if (!File.Exists(path)) 
-                Debug.LogError("Save file not found in " + path);
             if (!path.EndsWith(".json")) 
                 path += ".json";    // 保证文件后缀为json
-            
+            if (!File.Exists(path)) 
+                Debug.LogError("Save file not found in " + path);
+
             var jsonData = File.ReadAllText(path);
             return JsonConvert.DeserializeObject<T>(jsonData);  // 使用Newtonsoft.Json库, 支持反序列化Dictionary和List
         }
-
+        
         public static void DeleteSaveFile(string saveFileName)
         {
             var path = Path.Combine(Application.persistentDataPath, saveFileName);
