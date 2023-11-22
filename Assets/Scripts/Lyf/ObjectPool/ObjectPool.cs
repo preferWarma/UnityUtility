@@ -6,6 +6,9 @@ namespace Lyf.ObjectPool
 {
     public class ObjectPool : Singleton<ObjectPool>
     {
+        private const int InitialPoolCount = 10; // 初始对象池大小
+        private const int AddCount = 5; // 每次增加的对象数量
+
         private readonly Dictionary<string, Queue<GameObject>> _objectPools = new(); // key: prefab 名字, value: prefabs对应的对象池
         private readonly Dictionary<string, int> _poolMaxCountDic = new(); // key: prefab 名字, value: prefabs对应的对象池的当前最大数量
         private GameObject _parentPool;   // 所有对象池的父物体
@@ -50,43 +53,43 @@ namespace Lyf.ObjectPool
             prefab.SetActive(false);
         }
         
-        private void FillPool(GameObject prefab) // 填充该对象对应的对象池, 采用二倍填充
+        private void FillPool(GameObject prefab) // 填充该对象对应的对象池, 采用固定扩容策略
         {
             var parent = _parentPool.transform.Find(prefab.name + "Pool");
             // 如果该对象对应的对象池不存在则创建一个新的对象池与之对应
             if (!_objectPools.ContainsKey(prefab.name))
             {
                 _objectPools.Add(prefab.name, new Queue<GameObject>());
-                // 初始容量设置为 10
-                for (var i = 0; i < 10; i++)
+                // 初始容量设置
+                for (var i = 0; i < InitialPoolCount; i++)
                 {
                     var obj = Object.Instantiate(prefab, parent, true);
                     Recycle(obj);
                 }
-                _poolMaxCountDic.Add(prefab.name, 10);
-                Debug.Log($"已创建{prefab.name}Pool对象池, 初始容量设置为 10");
+                _poolMaxCountDic.Add(prefab.name, InitialPoolCount);
+                Debug.Log($"已创建{prefab.name}Pool对象池, 初始容量设置为 {InitialPoolCount}");
             }
 
-            else // 存在对象池则二倍扩容
+            else // 存在对象池则扩容
             {
-                if (_poolMaxCountDic[prefab.name] == 0) // 如果之前清空了该对象池,则首次填充的时候,容量设置为 10
+                if (_poolMaxCountDic[prefab.name] == 0) // 如果之前清空了该对象池,则首次填充的时候,容量设置为初始值
                 {
-                    _poolMaxCountDic[prefab.name] = 10;
+                    _poolMaxCountDic[prefab.name] = InitialPoolCount;
                     for (var i = 0; i < _poolMaxCountDic[prefab.name]; i++)
                     {
                         var obj = Object.Instantiate(prefab, parent, true);
                         Recycle(obj);
                     }
-                    Debug.Log($"已重新初始化{prefab.name}Pool对象池, 当前容量为 10");
+                    Debug.Log($"已重新初始化{prefab.name}Pool对象池, 当前容量为 {InitialPoolCount}");
                 }
-                else
+                else // 如果之前没有清空该对象池,则扩容
                 {
-                    for (var i = 0; i < _poolMaxCountDic[prefab.name]; i++)
+                    for (var i = 0; i < AddCount ; i++)
                     {
                         var obj = Object.Instantiate(prefab, parent, true);
                         Recycle(obj);
                     }
-                    _poolMaxCountDic[prefab.name] *= 2;
+                    _poolMaxCountDic[prefab.name] += AddCount;
                     Debug.Log($"已扩容{prefab.name}Pool对象池, 当前容量为 {_poolMaxCountDic[prefab.name]}");
                 }
             }
