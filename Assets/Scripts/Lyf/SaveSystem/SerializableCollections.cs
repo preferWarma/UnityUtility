@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
+using Debug = System.Diagnostics.Debug;
 
 namespace Lyf.SaveSystem
 {
@@ -25,6 +26,7 @@ namespace Lyf.SaveSystem
     {
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
+            Debug.Assert(value != null, nameof(value) + " != null");
             var vector = (Vector3)value;
             var obj = new JObject
             {
