@@ -3,8 +3,6 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
 using Microsoft.CSharp;
-using UnityEditor;
-using UnityEngine;
 
 namespace Lyf.Utils.CodeCreate
 {
@@ -57,9 +55,9 @@ namespace Lyf.Utils.CodeCreate
         /// <param name="savePathFolder">文件保存路径(不包括类名)</param>
         /// <param name="baseClassName">基类</param>
         /// <param name="classNamespace">类命名空间</param>
-        /// <param name="reference">using引用目录(默认含有System和UnityEngine)</param>
+        /// <param name="reference">using引用目录(默认含有System和UnityEngine和System.Collections.Generic)</param>
         public static void CreateClass(string className, List<MemberStruct> members, string savePathFolder = "Assets/Scripts/Generation", 
-            string baseClassName = null, string classNamespace = "DefaultNameSpace", List<string> reference = null)
+            string classNamespace = "DefaultNameSpace", string baseClassName = null, List<string> reference = null)
         {
             // 生成代码
             var compileUnit = new CodeCompileUnit();
@@ -69,6 +67,7 @@ namespace Lyf.Utils.CodeCreate
             // 添加using
             codeNamespace.Imports.Add(new CodeNamespaceImport("System"));
             codeNamespace.Imports.Add(new CodeNamespaceImport("UnityEngine"));
+            codeNamespace.Imports.Add(new CodeNamespaceImport("System.Collections.Generic"));
             if (reference != null)
             {
                 foreach (var usingName in reference)
@@ -95,12 +94,11 @@ namespace Lyf.Utils.CodeCreate
             // 成员声明
             foreach (var member in members)
             {
-                if (!KeyWords.ContainsKey(member.MemberType))
+                var memberType = member.MemberType;
+                if (KeyWords.ContainsKey(member.MemberType))
                 {
-                    Debug.LogError($"不支持的类型: {member.MemberType}");
-                    continue;
+                    memberType = KeyWords[member.MemberType];
                 }
-                var memberType = KeyWords[member.MemberType];
                 var memberField = new CodeMemberField(memberType, member.MemberName)
                 {
                     Attributes = member.IsPublic ? MemberAttributes.Public : MemberAttributes.Private
@@ -115,14 +113,14 @@ namespace Lyf.Utils.CodeCreate
             }
             
             // 将生成的代码保存到文件
-            var savePath = savePathFolder + (savePathFolder.EndsWith("/") ? "" : "/") + className + ".cs";
+            var savePath = Path.Combine(savePathFolder, className + ".cs");
             using (var sw = new StreamWriter(savePath))
             {
                 var codeProvider = new CSharpCodeProvider();
                 codeProvider.GenerateCodeFromCompileUnit(compileUnit, sw, new CodeGeneratorOptions());
             }
-            AssetDatabase.Refresh();
-            Debug.Log($"{className}.cs已生成到文件: {savePath}");
+            
+            // AssetDatabase.Refresh();
         }
 
         
@@ -162,15 +160,14 @@ namespace Lyf.Utils.CodeCreate
             {
                 Directory.CreateDirectory(savePathFolder);
             }
-            var savePath = savePathFolder + (savePathFolder.EndsWith("/") ? "" : "/") + enumName + ".cs";
+            var savePath = Path.Combine(savePathFolder, enumName + ".cs");
             using (var sw = new StreamWriter(savePath))
             {
                 var codeProvider = new CSharpCodeProvider();
                 codeProvider.GenerateCodeFromCompileUnit(compileUnit, sw, new CodeGeneratorOptions());
             }
 
-            AssetDatabase.Refresh();
-            Debug.Log($"{enumName}.cs已生成到文件: {savePath}");
+            // AssetDatabase.Refresh();
         }
     }
 }

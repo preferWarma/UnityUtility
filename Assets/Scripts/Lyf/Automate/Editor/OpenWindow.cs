@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using System.Linq;
+using Lyf.Utils.CodeCreate;
 using UnityEditor;
 using UnityEngine;
 #if UNITY_EDITOR
@@ -41,8 +43,14 @@ namespace Lyf.Automate.Editor
                 }
                 
                 // 生成数据
-                DialogueDataGenerate.GenerateScriptableObject(_filePath, _assetPath);
-                
+                // DialogueDataGenerate.GenerateScriptableObject(_filePath, _assetPath);
+                var excelData = ExcelHelper.ReadExcel(_filePath);
+                var firstTable = excelData.First().Value;
+                var classNames = ExcelHelper.GenerateClassAndEnumCode(firstTable, _assetPath, "Test_RowData", "Test_TableData" , typeof(Example).Namespace);
+                foreach (var className in classNames)
+                {
+                    Debug.Log(className);
+                }
             }
         }
     }
