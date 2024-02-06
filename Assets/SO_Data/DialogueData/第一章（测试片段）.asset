@@ -9,175 +9,167 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9a15bb8ec42441281311625b72aa926, type: 3}
+  m_Script: {fileID: 11500000, guid: 028fc78e34257204db454ae303673f41, type: 3}
   m_Name: "\u7B2C\u4E00\u7AE0\uFF08\u6D4B\u8BD5\u7247\u6BB5\uFF09"
   m_EditorClassIdentifier: 
-  pieceDataList:
-  - id: 12
-    type: 0
-    detail: "\u4F60\u597D\uFF0C\u6B22\u8FCE\u6765\u6211\u4EEC\u73ED\u54E6\u3002"
-    figureID: 10
-    figureLocation: 3
-    spriteID: 10
-    effect: {fileID: 0}
-    nextID: 0d000000
-  - id: 13
-    type: 0
-    detail: "\u5F88\u9AD8\u5174\u8BA4\u8BC6\u4F60\u3002"
-    figureID: 2
-    figureLocation: 1
-    spriteID: 2
-    effect: {fileID: 0}
-    nextID: 0e000000
-  - id: 14
-    type: 1
-    detail: "\uFF08\u8981\u95EE\u4E00\u4E0B\u5979\u5173\u4E8E\u8BBA\u575B\u7684\u4E8B\u5417\uFF1F\uFF09"
-    figureID: 2
-    figureLocation: 1
-    spriteID: 2
-    effect: {fileID: 0}
-    nextID: 0f00000020000000
-  - id: 15
-    type: 2
-    detail: "\u95EE\u4E00\u4E0B\u6BD4\u8F83\u597D"
-    figureID: -1
-    figureLocation: 0
-    spriteID: -1
-    effect: {fileID: 0}
-    nextID: 10000000
-  - id: 16
-    type: 1
-    detail: "\u554A\u554A\u4F60\u770B\u8FC7\u8BBA\u575B\u4E86\u662F\u4E0D\u662F\uFF01\u4F60\u76F8\u4FE1\u7075\u5F02\u4E8B\u4EF6\u5417\uFF1F"
-    figureID: 10
-    figureLocation: 3
-    spriteID: 10
-    effect: {fileID: 0}
-    nextID: 1100000019000000
-  - id: 17
-    type: 2
-    detail: "\u5F53\u7136\u76F8\u4FE1"
-    figureID: -1
-    figureLocation: 0
-    spriteID: -1
-    effect: {fileID: 0}
-    nextID: 12000000
-  - id: 18
-    type: 0
-    detail: "\u662F\u554A\u6211\u4E5F\u662F\uFF0C\u771F\u662F\u592A\u53EF\u6015\u4E86\uFF0C\u4F60\u53EF\u5343\u4E07\u522B\u5728\u591C\u91CC\u53BB\u6211\u4EEC\u8FD9\u697C\u7684\u5973\u536B\u751F\u95F4\uFF01"
-    figureID: 10
-    figureLocation: 3
-    spriteID: 10
-    effect: {fileID: 0}
-    nextID: 13000000
-  - id: 19
-    type: 0
-    detail: "\u600E\u4E48\u4E86\u5417\uFF1F"
-    figureID: 2
-    figureLocation: 1
-    spriteID: 2
-    effect: {fileID: 0}
-    nextID: 14000000
-  - id: 20
-    type: 0
-    detail: "\u524D\u5929\u665A\u4E0A\u6211\u4EEC\u73ED\u6709\u4E2A\u4EBA\u5728\u91CC\u5934\u51ED\u7A7A\u6D88\u5931\u4E86\u2026\u2026\u800C\u4E14\u2026\u2026\uFF08\u5979\u538B\u4F4E\u58F0\u97F3\uFF09\u5E73\u5B89\u591C\u90A3\u5929\u665A\u4E0A\uFF0C\u8FD8\u6709\u4E2A\u5B66\u751F\u6B7B\u5728\u91CC\u5934\u4E86\uFF0C\u4E5F\u662F\u6211\u4EEC\u73ED\u7684\u2026\u2026\u603B\u4E4B\u90A3\u4E2A\u536B\u751F\u95F4\u4E0D\u592A\u5E73\u3002"
-    figureID: 10
-    figureLocation: 3
-    spriteID: 10
-    effect: {fileID: 0}
-    nextID: 15000000
-  - id: 21
-    type: 0
-    detail: "\uFF08\u6709\u5B66\u751F\u6B7B\u4E86\uFF1F\u96BE\u4E0D\u6210\u662F\u90A3\u4E2A\u6028\u7075\uFF1F\uFF09"
-    figureID: 2
-    figureLocation: 1
-    spriteID: 2
-    effect: {fileID: 0}
-    nextID: 16000000
-  - id: 22
-    type: 0
-    detail: "\u6709\u4EBA\u6B7B\u4E86\u2026\u2026\uFF1F\u53EF\u662F\u6211\u600E\u4E48\u6CA1\u542C\u8BF4\u6709\u4EC0\u4E48\u62A5\u9053\u554A\u2026\u2026"
-    figureID: 2
-    figureLocation: 1
-    spriteID: 2
-    effect: {fileID: 0}
-    nextID: 17000000
-  - id: 23
-    type: 0
-    detail: "\u4E0D\u662F\u54B1\u4EEC\u8BE5\u7BA1\u7684\u4E8B\u4F60\u522B\u7BA1\uFF0C\u4E0D\u8FC7\u6B7B\u7684\u90A3\u4E2A\u2026\u2026\u7B97\u4E86\uFF0C\u8FD9\u79CD\u4E8B\u8FD8\u662F\u8981\u907F\u8BB3\u7740\u70B9\u513F\uFF0C\u5C11\u8C08\u4E3A\u5999\uFF0C\u603B\u4E4B\u4F60\u79BB\u90A3\u4E2A\u536B\u751F\u95F4\u8FDC\u4E00\u70B9\u5C31\u662F\u4E86\u3002"
-    figureID: 10
-    figureLocation: 3
-    spriteID: 10
-    effect: {fileID: 0}
-    nextID: 18000000
-  - id: 24
-    type: 0
-    detail: "\u597D\uFF0C\u8C22\u8C22\u3002"
-    figureID: 2
-    figureLocation: 1
-    spriteID: 2
-    effect: {fileID: 0}
-    nextID: ffffffff
-  - id: 25
-    type: 2
-    detail: "\u8981\u76F8\u4FE1\u79D1\u5B66"
-    figureID: -1
-    figureLocation: 0
-    spriteID: -1
-    effect: {fileID: 0}
-    nextID: 1a000000
-  - id: 26
-    type: 0
-    detail: "\u90FD\u53D1\u751F\u8FD9\u6837\u7684\u4E8B\u4E86\u4F60\u5C45\u7136\u8FD8\u4E0D\u4FE1\uFF1F"
-    figureID: 10
-    figureLocation: 3
-    spriteID: 10
-    effect: {fileID: 0}
-    nextID: 1b000000
-  - id: 27
-    type: 0
-    detail: "\u5230\u5E95\u4EC0\u4E48\u4E8B\u554A\uFF1F"
-    figureID: 2
-    figureLocation: 1
-    spriteID: 2
-    effect: {fileID: 0}
-    nextID: 1c000000
-  - id: 28
-    type: 0
-    detail: "\u6211\u4EEC\u8FD9\u5C42\u697C\u7684\u5973\u536B\u751F\u95F4\uFF0C\u5148\u662F\u524D\u51E0\u5929\u6211\u4EEC\u73ED\u6709\u4E2A\u53EB\u9646\u4E00\u5FC3\u7684\u6B7B\u5728\u91CC\u5934\u4E86\uFF0C\u4F60\u7684\u5EA7\u4F4D\u8FD8\u662F\u5979\u4E4B\u524D\u7684\u2026\u2026\u540E\u662F\u6628\u665A\uFF0C\u8FD9\u4E2A\u4EBA\u6700\u597D\u7684\u670B\u53CB\u6768\u5584\uFF0C\u7A81\u7136\u5C31\u5728\u536B\u751F\u95F4\u5931\u8E2A\u4E86\uFF01\u8FD9\u4E0D\u53EF\u6015\u5417\uFF1F"
-    figureID: 10
-    figureLocation: 3
-    spriteID: 10
-    effect: {fileID: 0}
-    nextID: 1d000000
-  - id: 29
-    type: 0
-    detail: "\uFF08\u6B7B\u4EBA\u2026\u2026\u5931\u8E2A\u2026\u2026\u6028\u7075\uFF1F\uFF09"
-    figureID: 2
-    figureLocation: 1
-    spriteID: 2
-    effect: {fileID: 0}
-    nextID: 1e000000
-  - id: 30
-    type: 0
-    detail: "\u6709\u4EBA\u6B7B\u4E86\uFF1F\u6211\u600E\u4E48\u4ECE\u6CA1\u542C\u8BF4\u8FC7\u76F8\u5173\u62A5\u9053\uFF1F"
-    figureID: 2
-    figureLocation: 1
-    spriteID: 2
-    effect: {fileID: 0}
-    nextID: 1f000000
-  - id: 31
-    type: 0
-    detail: "\u4F60\u8981\u662F\u5B9E\u5728\u4E0D\u4FE1\uFF0C\u5C31\u81EA\u5DF1\u53BB\u90A3\u4E2A\u536B\u751F\u95F4\u770B\u770B\u597D\u4E86\uFF0C\u53CD\u6B63\u6211\u89C9\u5F97\u4E00\u8FDB\u53BB\u5C31\u7279\u522B\u9634\u51B7\u3002\u5230\u65F6\u5019\u4F60\u8981\u662F\u9047\u5230\u4E86\u4EC0\u4E48\uFF0C\u53EF\u522B\u602A\u6211\u6CA1\u63D0\u9192\u4F60\u3002"
-    figureID: 10
-    figureLocation: 3
-    spriteID: 10
-    effect: {fileID: 0}
-    nextID: ffffffff
-  - id: 32
-    type: 2
-    detail: "\u8FD8\u662F\u7B97\u4E86"
-    figureID: -1
-    figureLocation: 0
-    spriteID: -1
-    effect: {fileID: 0}
-    nextID: ffffffff
+  dataList:
+  - ID: 12
+    Type: 0
+    Detail: "\u4F60\u597D\uFF0C\u6B22\u8FCE\u6765\u6211\u4EEC\u73ED\u54E6\u3002"
+    FigureID: 10
+    FigureLocation: 3
+    SpriteID: 10
+    Effect: {fileID: 0}
+    NextID: 0d000000
+  - ID: 13
+    Type: 0
+    Detail: "\u5F88\u9AD8\u5174\u8BA4\u8BC6\u4F60\u3002"
+    FigureID: 2
+    FigureLocation: 1
+    SpriteID: 2
+    Effect: {fileID: 0}
+    NextID: 0e000000
+  - ID: 14
+    Type: 1
+    Detail: "\uFF08\u8981\u95EE\u4E00\u4E0B\u5979\u5173\u4E8E\u8BBA\u575B\u7684\u4E8B\u5417\uFF1F\uFF09"
+    FigureID: 2
+    FigureLocation: 1
+    SpriteID: 2
+    Effect: {fileID: 0}
+    NextID: 0f00000020000000
+  - ID: 15
+    Type: 2
+    Detail: "\u95EE\u4E00\u4E0B\u6BD4\u8F83\u597D"
+    FigureID: -1
+    FigureLocation: 0
+    SpriteID: -1
+    Effect: {fileID: 0}
+    NextID: 10000000
+  - ID: 16
+    Type: 1
+    Detail: "\u554A\u554A\u4F60\u770B\u8FC7\u8BBA\u575B\u4E86\u662F\u4E0D\u662F\uFF01\u4F60\u76F8\u4FE1\u7075\u5F02\u4E8B\u4EF6\u5417\uFF1F"
+    FigureID: 10
+    FigureLocation: 3
+    SpriteID: 10
+    Effect: {fileID: 0}
+    NextID: 1100000019000000
+  - ID: 17
+    Type: 2
+    Detail: "\u5F53\u7136\u76F8\u4FE1"
+    FigureID: -1
+    FigureLocation: 0
+    SpriteID: -1
+    Effect: {fileID: 0}
+    NextID: 12000000
+  - ID: 18
+    Type: 0
+    Detail: "\u662F\u554A\u6211\u4E5F\u662F\uFF0C\u771F\u662F\u592A\u53EF\u6015\u4E86\uFF0C\u4F60\u53EF\u5343\u4E07\u522B\u5728\u591C\u91CC\u53BB\u6211\u4EEC\u8FD9\u697C\u7684\u5973\u536B\u751F\u95F4\uFF01"
+    FigureID: 10
+    FigureLocation: 3
+    SpriteID: 10
+    Effect: {fileID: 0}
+    NextID: 13000000
+  - ID: 19
+    Type: 0
+    Detail: "\u600E\u4E48\u4E86\u5417\uFF1F"
+    FigureID: 2
+    FigureLocation: 1
+    SpriteID: 2
+    Effect: {fileID: 0}
+    NextID: 14000000
+  - ID: 20
+    Type: 0
+    Detail: "\u524D\u5929\u665A\u4E0A\u6211\u4EEC\u73ED\u6709\u4E2A\u4EBA\u5728\u91CC\u5934\u51ED\u7A7A\u6D88\u5931\u4E86\u2026\u2026\u800C\u4E14\u2026\u2026\uFF08\u5979\u538B\u4F4E\u58F0\u97F3\uFF09\u5E73\u5B89\u591C\u90A3\u5929\u665A\u4E0A\uFF0C\u8FD8\u6709\u4E2A\u5B66\u751F\u6B7B\u5728\u91CC\u5934\u4E86\uFF0C\u4E5F\u662F\u6211\u4EEC\u73ED\u7684\u2026\u2026\u603B\u4E4B\u90A3\u4E2A\u536B\u751F\u95F4\u4E0D\u592A\u5E73\u3002"
+    FigureID: 10
+    FigureLocation: 3
+    SpriteID: 10
+    Effect: {fileID: 0}
+    NextID: 15000000
+  - ID: 21
+    Type: 0
+    Detail: "\uFF08\u6709\u5B66\u751F\u6B7B\u4E86\uFF1F\u96BE\u4E0D\u6210\u662F\u90A3\u4E2A\u6028\u7075\uFF1F\uFF09"
+    FigureID: 2
+    FigureLocation: 1
+    SpriteID: 2
+    Effect: {fileID: 0}
+    NextID: 16000000
+  - ID: 22
+    Type: 0
+    Detail: "\u6709\u4EBA\u6B7B\u4E86\u2026\u2026\uFF1F\u53EF\u662F\u6211\u600E\u4E48\u6CA1\u542C\u8BF4\u6709\u4EC0\u4E48\u62A5\u9053\u554A\u2026\u2026"
+    FigureID: 2
+    FigureLocation: 1
+    SpriteID: 2
+    Effect: {fileID: 0}
+    NextID: 17000000
+  - ID: 23
+    Type: 0
+    Detail: "\u4E0D\u662F\u54B1\u4EEC\u8BE5\u7BA1\u7684\u4E8B\u4F60\u522B\u7BA1\uFF0C\u4E0D\u8FC7\u6B7B\u7684\u90A3\u4E2A\u2026\u2026\u7B97\u4E86\uFF0C\u8FD9\u79CD\u4E8B\u8FD8\u662F\u8981\u907F\u8BB3\u7740\u70B9\u513F\uFF0C\u5C11\u8C08\u4E3A\u5999\uFF0C\u603B\u4E4B\u4F60\u79BB\u90A3\u4E2A\u536B\u751F\u95F4\u8FDC\u4E00\u70B9\u5C31\u662F\u4E86\u3002"
+    FigureID: 10
+    FigureLocation: 3
+    SpriteID: 10
+    Effect: {fileID: 0}
+    NextID: 18000000
+  - ID: 24
+    Type: 0
+    Detail: "\u597D\uFF0C\u8C22\u8C22\u3002"
+    FigureID: 2
+    FigureLocation: 1
+    SpriteID: 2
+    Effect: {fileID: 0}
+    NextID: 
+  - ID: 25
+    Type: 2
+    Detail: "\u8981\u76F8\u4FE1\u79D1\u5B66"
+    FigureID: -1
+    FigureLocation: 0
+    SpriteID: -1
+    Effect: {fileID: 0}
+    NextID: 1a000000
+  - ID: 26
+    Type: 0
+    Detail: "\u90FD\u53D1\u751F\u8FD9\u6837\u7684\u4E8B\u4E86\u4F60\u5C45\u7136\u8FD8\u4E0D\u4FE1\uFF1F"
+    FigureID: 10
+    FigureLocation: 3
+    SpriteID: 10
+    Effect: {fileID: 0}
+    NextID: 1b000000
+  - ID: 27
+    Type: 0
+    Detail: "\u5230\u5E95\u4EC0\u4E48\u4E8B\u554A\uFF1F"
+    FigureID: 2
+    FigureLocation: 1
+    SpriteID: 2
+    Effect: {fileID: 0}
+    NextID: 1c000000
+  - ID: 28
+    Type: 0
+    Detail: "\u6211\u4EEC\u8FD9\u5C42\u697C\u7684\u5973\u536B\u751F\u95F4\uFF0C\u5148\u662F\u524D\u51E0\u5929\u6211\u4EEC\u73ED\u6709\u4E2A\u53EB\u9646\u4E00\u5FC3\u7684\u6B7B\u5728\u91CC\u5934\u4E86\uFF0C\u4F60\u7684\u5EA7\u4F4D\u8FD8\u662F\u5979\u4E4B\u524D\u7684\u2026\u2026\u540E\u662F\u6628\u665A\uFF0C\u8FD9\u4E2A\u4EBA\u6700\u597D\u7684\u670B\u53CB\u6768\u5584\uFF0C\u7A81\u7136\u5C31\u5728\u536B\u751F\u95F4\u5931\u8E2A\u4E86\uFF01\u8FD9\u4E0D\u53EF\u6015\u5417\uFF1F"
+    FigureID: 10
+    FigureLocation: 3
+    SpriteID: 10
+    Effect: {fileID: 0}
+    NextID: 1d000000
+  - ID: 29
+    Type: 0
+    Detail: "\uFF08\u6B7B\u4EBA\u2026\u2026\u5931\u8E2A\u2026\u2026\u6028\u7075\uFF1F\uFF09"
+    FigureID: 2
+    FigureLocation: 1
+    SpriteID: 2
+    Effect: {fileID: 0}
+    NextID: 1e000000
+  - ID: 30
+    Type: 0
+    Detail: "\u6709\u4EBA\u6B7B\u4E86\uFF1F\u6211\u600E\u4E48\u4ECE\u6CA1\u542C\u8BF4\u8FC7\u76F8\u5173\u62A5\u9053\uFF1F"
+    FigureID: 2
+    FigureLocation: 1
+    SpriteID: 2
+    Effect: {fileID: 0}
+    NextID: 1f000000
+  - ID: 31
+    Type: 0
+    Detail: "\u4F60\u8981\u662F\u5B9E\u5728\u4E0D\u4FE1\uFF0C\u5C31\u81EA\u5DF1\u53BB\u90A3\u4E2A\u536B\u751F\u95F4\u770B\u770B\u597D\u4E86\uFF0C\u53CD\u6B63\u6211\u89C9\u5F97\u4E00\u8FDB\u53BB\u5C31\u7279\u522B\u9634\u51B7\u3002\u5230\u65F6\u5019\u4F60\u8981\u662F\u9047\u5230\u4E86\u4EC0\u4E48\uFF0C\u53EF\u522B\u602A\u6211\u6CA1\u63D0\u9192\u4F60\u3002"
+    FigureID: 10
+    FigureLocation: 3
+    SpriteID: 10
+    Effect: {fileID: 0}
+    NextID: ffffffff

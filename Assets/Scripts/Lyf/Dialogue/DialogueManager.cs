@@ -39,7 +39,7 @@ namespace Lyf.Dialogue
         public void SetDialogueData(DialogueData other)  // 设置对话数据
         {
             currentDialogueData = other;
-            currentPieceData = currentDialogueData.pieceDataList[0];  // 保证改变对话数据集后每次都是从第一条对话开始
+            currentPieceData = currentDialogueData.dataList[0];  // 保证改变对话数据集后每次都是从第一条对话开始
             UpdateShow();  // 更新为当前对话显示
         }
         
@@ -149,7 +149,7 @@ namespace Lyf.Dialogue
         
         private PieceData GetPieceData(int id)   // 获取PieceData
         {
-            return currentDialogueData.pieceDataList.FirstOrDefault(pieceData => pieceData.id == id);
+            return currentDialogueData.dataList.FirstOrDefault(pieceData => pieceData.id == id);
         }
     }
 }

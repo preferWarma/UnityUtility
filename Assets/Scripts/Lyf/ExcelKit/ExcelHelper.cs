@@ -3,10 +3,9 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using ExcelDataReader;
-using Lyf.Dialogue;
 using Lyf.Utils.CodeCreate;
 
-namespace Lyf.Automate
+namespace Lyf.ExcelKit
 {
     //第一行为此描述, 说明该表的格式:
     //第二行为成员变量名,
@@ -29,7 +28,7 @@ namespace Lyf.Automate
                 ConfigureDataTable = _ => new ExcelDataTableConfiguration
                 {
                     UseHeaderRow = true, // 跳过后的第一行作为列名
-                    FilterRow = rowReader => rowReader.Depth >= 1 // 跳过第一行数据(作为描述), 第二行为列名
+                    // FilterRow = rowReader => rowReader.Depth >= 1 // 跳过第一行数据(作为描述)
                 }
             });
 
@@ -45,22 +44,23 @@ namespace Lyf.Automate
 
 
         /// <summary>
-        /// 将Excel表转为对话数据字典, key为sheet名，value为对话数据列表
+        /// 将Excel表转为行数据列表的字典, key为sheet名，value为行数据列表
         /// </summary>
-        public static Dictionary<string, List<PieceData>> ReadExcelToPieceDataList(string excelPath)
+        /// <param name="excelPath"></param>
+        /// <typeparam name="T">表示一行数据的类, 需要可以new()</typeparam>
+        /// <returns></returns>
+        public static Dictionary<string, List<T>> ReadExcelToRowClassList <T>(string excelPath) where T : new()
         {
-            var res = new Dictionary<string, List<PieceData>>();
+            var res = new Dictionary<string, List<T>>();
             var excelData = ReadExcel(excelPath);
             foreach (var (sheetName, dataTable) in excelData)
             {
-                var pieceDataList = DialogueDataGenerate.ConvertToPieceDataList(dataTable);
-                res.Add(sheetName, pieceDataList);
+                var rowClassList = ScriptableDataGenerate.ConvertDataTableToList<T>(dataTable);
+                res.Add(sheetName, rowClassList);
             }
-
             return res;
         }
-
-
+        
         /// <summary>
         /// 根据所给的DataTable生成对应的类和枚举，其中类会生成两个， 一个为行数据类，一个为表数据类(ScriptableObject类型)
         /// </summary>
@@ -98,15 +98,17 @@ namespace Lyf.Automate
                 members.Add(new MemberStruct(memberTypes[i], memberNames[i]));
             }
             // 生成该Sheet每一行对应的类
-            CodeGenerator.CreateClass(rowClassName, members, savePathFolder, codeNameSpace);
+            CodeGenerator.CreateClass(rowClassName, members, savePathFolder, codeNameSpace, serializable: true);
             
             // 生成表数据类：ScriptableObject类型
             members.Clear();
-            members.Add(new MemberStruct($"List<{codeNameSpace}.{rowClassName}>", "DataList"));
+            members.Add(new MemberStruct($"List<{codeNameSpace}.{rowClassName}>", "dataList"));
             CodeGenerator.CreateClass(tableClassName, members, savePathFolder, codeNameSpace, "ScriptableObject");
             
             // 返回可调用的行类名和表类名
             return new[] {$"{codeNameSpace}.{rowClassName}", $"{codeNameSpace}.{tableClassName}"};
         }
     }
+    public class RowClassTemplate { }
+    public class TableClassTemplate { }
 }

@@ -1,4 +1,5 @@
-﻿using System.CodeDom;
+﻿using System;
+using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.IO;
@@ -44,9 +45,10 @@ namespace Lyf.Utils.CodeCreate
             {"uint[]", "System.UInt32[]"},
             {"ulong[]", "System.UInt64[]"},
             {"ushort[]", "System.UInt16[]"},
-            {"void[]", "System.Void[]"}
+            {"void[]", "System.Void[]"},
+            {"GameObject", "UnityEngine.GameObject"}
         };
-        
+
         /// <summary>
         /// 生成类
         /// </summary>
@@ -56,8 +58,9 @@ namespace Lyf.Utils.CodeCreate
         /// <param name="baseClassName">基类</param>
         /// <param name="classNamespace">类命名空间</param>
         /// <param name="reference">using引用目录(默认含有System和UnityEngine和System.Collections.Generic)</param>
+        /// <param name="serializable">是否添加标签[System.Serializable]</param>
         public static void CreateClass(string className, List<MemberStruct> members, string savePathFolder = "Assets/Scripts/Generation", 
-            string classNamespace = "DefaultNameSpace", string baseClassName = null, List<string> reference = null)
+            string classNamespace = "DefaultNameSpace", string baseClassName = null, List<string> reference = null, bool serializable = false)
         {
             // 生成代码
             var compileUnit = new CodeCompileUnit();
@@ -83,6 +86,14 @@ namespace Lyf.Utils.CodeCreate
             {
                 IsClass = true
             };
+            
+            // 添加 [System.Serializable] 标签
+            if (serializable)
+            {
+                // 添加 [System.Serializable] 标签
+                var serializableAttribute = new CodeAttributeDeclaration(new CodeTypeReference(typeof(SerializableAttribute)));
+                classDeclaration.CustomAttributes.Add(serializableAttribute);
+            }
 
             // 继承的基类
             if (!string.IsNullOrEmpty(baseClassName))
@@ -114,13 +125,9 @@ namespace Lyf.Utils.CodeCreate
             
             // 将生成的代码保存到文件
             var savePath = Path.Combine(savePathFolder, className + ".cs");
-            using (var sw = new StreamWriter(savePath))
-            {
-                var codeProvider = new CSharpCodeProvider();
-                codeProvider.GenerateCodeFromCompileUnit(compileUnit, sw, new CodeGeneratorOptions());
-            }
-            
-            // AssetDatabase.Refresh();
+            using var sw = new StreamWriter(savePath);
+            var codeProvider = new CSharpCodeProvider();
+            codeProvider.GenerateCodeFromCompileUnit(compileUnit, sw, new CodeGeneratorOptions());
         }
 
         
@@ -160,14 +167,11 @@ namespace Lyf.Utils.CodeCreate
             {
                 Directory.CreateDirectory(savePathFolder);
             }
+            
             var savePath = Path.Combine(savePathFolder, enumName + ".cs");
-            using (var sw = new StreamWriter(savePath))
-            {
-                var codeProvider = new CSharpCodeProvider();
-                codeProvider.GenerateCodeFromCompileUnit(compileUnit, sw, new CodeGeneratorOptions());
-            }
-
-            // AssetDatabase.Refresh();
+            using var sw = new StreamWriter(savePath);
+            var codeProvider = new CSharpCodeProvider();
+            codeProvider.GenerateCodeFromCompileUnit(compileUnit, sw, new CodeGeneratorOptions());
         }
     }
 }
