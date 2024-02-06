@@ -116,7 +116,7 @@ MonoBehaviour:
     FigureLocation: 1
     SpriteID: 2
     Effect: {fileID: 0}
-    NextID: 
+    NextID: ffffffff
   - ID: 25
     Type: 2
     Detail: "\u8981\u76F8\u4FE1\u79D1\u5B66"

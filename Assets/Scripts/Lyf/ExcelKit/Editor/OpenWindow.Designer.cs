@@ -5,7 +5,7 @@ namespace Lyf.ExcelKit.Editor
     {
         public void GenerateScriptableData()
         {
-            var generateMethod = typeof(ScriptableDataGenerate).GetMethod("GenerateScriptableObject")?.MakeGenericMethod(typeof(Generation.Test_RowClass), typeof(Generation.Test_TableClass));
+            var generateMethod = typeof(ScriptableDataGenerate).GetMethod("GenerateScriptableObject")?.MakeGenericMethod(typeof(void), typeof(void));
             generateMethod?.Invoke(null, new object[] { _filePath, _assetPath });
         }
     }

@@ -129,8 +129,6 @@ namespace Lyf.Utils.CodeCreate
             var codeProvider = new CSharpCodeProvider();
             codeProvider.GenerateCodeFromCompileUnit(compileUnit, sw, new CodeGeneratorOptions());
         }
-
-        
         
         /// <summary>
         /// 生成枚举

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using ExcelDataReader;
 using Lyf.Utils.CodeCreate;
+using UnityEngine;
 
 namespace Lyf.ExcelKit
 {
@@ -27,8 +28,7 @@ namespace Lyf.ExcelKit
             {
                 ConfigureDataTable = _ => new ExcelDataTableConfiguration
                 {
-                    UseHeaderRow = true, // 跳过后的第一行作为列名
-                    // FilterRow = rowReader => rowReader.Depth >= 1 // 跳过第一行数据(作为描述)
+                    FilterRow = rowReader => rowReader.Depth >= 1 // 跳过第一行数据(作为描述)
                 }
             });
 
@@ -72,7 +72,7 @@ namespace Lyf.ExcelKit
         /// <returns> 返回可调用的已生成的行类名和表类名(其中0号位为行类名，1号位为表类名)</returns>
         public static string[] GenerateClassAndEnumCode(DataTable dataTable, string savePathFolder, string rowClassName, string tableClassName, string codeNameSpace)
         {
-            // 获取成员变量名和类型
+            // 获取成员变量名和类型(此时的dataTable是已经跳过了第一行描述的)
             var memberNames = dataTable.Rows[0].ItemArray.Select(x => x.ToString()).ToArray();
             var memberTypes = dataTable.Rows[1].ItemArray.Select(x => x.ToString()).ToArray();
             for (var i = 0; i < memberTypes.Length; i++)
@@ -103,12 +103,10 @@ namespace Lyf.ExcelKit
             // 生成表数据类：ScriptableObject类型
             members.Clear();
             members.Add(new MemberStruct($"List<{codeNameSpace}.{rowClassName}>", "dataList"));
-            CodeGenerator.CreateClass(tableClassName, members, savePathFolder, codeNameSpace, "ScriptableObject");
+            CodeGenerator.CreateClass(tableClassName, members, savePathFolder, codeNameSpace, nameof(ScriptableObject));
             
             // 返回可调用的行类名和表类名
             return new[] {$"{codeNameSpace}.{rowClassName}", $"{codeNameSpace}.{tableClassName}"};
         }
     }
-    public class RowClassTemplate { }
-    public class TableClassTemplate { }
 }

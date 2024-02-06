@@ -18,12 +18,12 @@ namespace Lyf.ExcelKit
         /// <returns></returns>
         public static List<T> ConvertDataTableToList<T>(DataTable dataTable) where T : new()
         {
-            var pieceDataList = new List<T>();
+            var rowDataDataList = new List<T>();
             for (var i = 3; i < dataTable.Rows.Count; i++)
             {
                 var row = dataTable.Rows[i];
                 
-                var pieceData = new T();
+                var rowData = new T();
                 var fields = typeof(T).GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
                 for (var j = 0; j < fields.Length; j++)
                 {
@@ -36,17 +36,17 @@ namespace Lyf.ExcelKit
                     
                     if (fieldType == typeof(int))
                     {
-                        field.SetValue(pieceData, Convert.ToInt32(fieldValue));
+                        field.SetValue(rowData, Convert.ToInt32(fieldValue));
                     }
                     else if (fieldType == typeof(string))
                     {
-                        field.SetValue(pieceData, fieldValue.ToString());
+                        field.SetValue(rowData, fieldValue.ToString());
                     }
                     else if (fieldType.IsEnum)
                     {
                         if (Enum.TryParse(field.FieldType, fieldValue.ToString(), out var result))
                         {
-                            field.SetValue(pieceData, result);
+                            field.SetValue(rowData, result);
                         }
                         else
                         {
@@ -55,26 +55,26 @@ namespace Lyf.ExcelKit
                     }
                     else if (fieldType == typeof(GameObject))
                     {
-                        field.SetValue(pieceData, Resources.Load<GameObject>(fieldValue.ToString()));
+                        field.SetValue(rowData, Resources.Load<GameObject>(fieldValue.ToString()));
                     }
                     else if (fieldType == typeof(int[]))
                     {
-                        field.SetValue(pieceData, Array.ConvertAll(fieldValue.ToString().Split(','), int.Parse));
+                        field.SetValue(rowData, Array.ConvertAll(fieldValue.ToString().Split(','), int.Parse));
                     }
                     else if (fieldType == typeof(string[]))
                     {
-                        field.SetValue(pieceData, fieldValue.ToString().Split(','));
+                        field.SetValue(rowData, fieldValue.ToString().Split(','));
                     }
                     else if (fieldType == typeof(float[]))
                     {
-                        field.SetValue(pieceData, Array.ConvertAll(fieldValue.ToString().Split(','), float.Parse));
+                        field.SetValue(rowData, Array.ConvertAll(fieldValue.ToString().Split(','), float.Parse));
                     }
                 }
                 
-                pieceDataList.Add(pieceData);
+                rowDataDataList.Add(rowData);
             }
 
-            return pieceDataList;
+            return rowDataDataList;
         }
         
         /// <summary>
@@ -121,7 +121,7 @@ namespace Lyf.ExcelKit
         public static void ModifyExecuteMethod(string rowClassName, string tableClassName)
         {
             // 读取Template_OpenWindow_Designer.txt文件
-            const string filePath = "Assets/Scripts/Lyf/Automate/Editor/Template_OpenWindow_Designer.txt";
+            const string filePath = "Assets/Scripts/Lyf/ExcelKit/Editor/Template_OpenWindow_Designer.txt";
             var fileContent = File.ReadAllText(filePath);
 
             // 将文件内容部分替换
@@ -129,7 +129,7 @@ namespace Lyf.ExcelKit
                 .Replace("@2", tableClassName);
             
             // 写入文件
-            const string savePath = "Assets/Scripts/Lyf/Automate/Editor/OpenWindow.Designer.cs";
+            const string savePath = "Assets/Scripts/Lyf/ExcelKit/Editor/OpenWindow.Designer.cs";
             try
             {
                 File.WriteAllText(savePath, replaceContent);
@@ -140,6 +140,34 @@ namespace Lyf.ExcelKit
                 Debug.LogError(e);
             }
             Debug.Log("修改成功");
+        }
+        
+        /// <summary>
+        /// 恢复被修改的代码文件
+        /// </summary>
+        [MenuItem("Lyf/ExcelKit/恢复被修改的代码文件")]
+        public static void RestoreCodeFile()
+        {
+            // 读取Template_OpenWindow_Designer.txt文件
+            const string filePath = "Assets/Scripts/Lyf/ExcelKit/Editor/Template_OpenWindow_Designer.txt";
+            var fileContent = File.ReadAllText(filePath);
+
+            // 将文件内容部分替换
+            var replaceContent = fileContent.Replace("@1", "void").Replace("@2", "void");
+            
+            // 写入文件
+            const string savePath = "Assets/Scripts/Lyf/ExcelKit/Editor/OpenWindow.Designer.cs";
+            try
+            {
+                File.WriteAllText(savePath, replaceContent);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("恢复失败");
+                Debug.LogError(e);
+            }
+            Debug.Log("恢复成功");
+            AssetDatabase.Refresh();
         }
     }
 }
