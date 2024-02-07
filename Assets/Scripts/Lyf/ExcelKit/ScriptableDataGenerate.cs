@@ -120,26 +120,27 @@ namespace Lyf.ExcelKit
         /// <param name="tableClassName">表示整个表的数据的类的名字(ScriptableObject类型)</param>
         public static void ModifyExecuteMethod(string rowClassName, string tableClassName)
         {
-            // 读取Template_OpenWindow_Designer.txt文件
-            const string filePath = "Assets/Scripts/Lyf/ExcelKit/Editor/Template_OpenWindow_Designer.txt";
-            var fileContent = File.ReadAllText(filePath);
-
-            // 将文件内容部分替换
-            var replaceContent = fileContent.Replace("@1", rowClassName)
-                .Replace("@2", tableClassName);
-            
-            // 写入文件
-            const string savePath = "Assets/Scripts/Lyf/ExcelKit/Editor/OpenWindow.Designer.cs";
             try
             {
+                // 读取Template_OpenWindow_Designer.txt文件
+                const string filePath = "Assets/Scripts/Lyf/ExcelKit/Editor/Template_OpenWindow_Designer.txt";
+                var fileContent = File.ReadAllText(filePath);
+
+                // 将文件内容部分替换
+                var replaceContent = fileContent.Replace("@1", rowClassName)
+                    .Replace("@2", tableClassName);
+
+                // 写入文件
+                const string savePath = "Assets/Scripts/Lyf/ExcelKit/Editor/OpenWindow.Designer.cs";
                 File.WriteAllText(savePath, replaceContent);
+                
+                Debug.Log("修改成功");
             }
             catch (Exception e)
             {
                 Debug.LogError("修改失败");
                 Debug.LogError(e);
             }
-            Debug.Log("修改成功");
         }
         
         /// <summary>
@@ -148,26 +149,28 @@ namespace Lyf.ExcelKit
         [MenuItem("Lyf/ExcelKit/恢复被修改的代码文件")]
         public static void RestoreCodeFile()
         {
-            // 读取Template_OpenWindow_Designer.txt文件
-            const string filePath = "Assets/Scripts/Lyf/ExcelKit/Editor/Template_OpenWindow_Designer.txt";
-            var fileContent = File.ReadAllText(filePath);
-
-            // 将文件内容部分替换
-            var replaceContent = fileContent.Replace("@1", "void").Replace("@2", "void");
-            
-            // 写入文件
-            const string savePath = "Assets/Scripts/Lyf/ExcelKit/Editor/OpenWindow.Designer.cs";
-            try
+            try 
             {
+                // 读取Template_OpenWindow_Designer.txt文件
+                const string filePath = "Assets/Scripts/Lyf/ExcelKit/Editor/Template_OpenWindow_Designer.txt";
+                var fileContent = File.ReadAllText(filePath);
+
+                // 将文件内容部分替换
+                var replaceContent = fileContent.Replace("@1", "void").Replace("@2", "void");
+            
+                // 写入文件
+                const string savePath = "Assets/Scripts/Lyf/ExcelKit/Editor/OpenWindow.Designer.cs";
+            
                 File.WriteAllText(savePath, replaceContent);
+                
+                Debug.Log("恢复成功");
+                AssetDatabase.Refresh();
             }
             catch (Exception e)
             {
                 Debug.LogError("恢复失败");
                 Debug.LogError(e);
             }
-            Debug.Log("恢复成功");
-            AssetDatabase.Refresh();
         }
     }
 }
