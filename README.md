@@ -2,129 +2,123 @@
 
 [TOC]
 
-## (一) 对话系统
+## (一) 代码生成器
 
-### 1.数据生成
+### 1. 兼容性设置
 
-该dialogue system提供了数据生成的快捷脚本DialogueDataGenerate.cs
+代码生成是基于System.CodeDom库编写的, 此库对兼容性有一些要求, 如果导入后Unity报错, 可以在Project Settings里修改项目框架兼容性, 具体如下:
 
-***【注】使用该脚本需要使用.NET第三方库ExcelDataReader和ExcelDataReader.DataSet***
+Edit -> Project Settings -> Player -> Other Settings -> Api Compatibility Level, 将此选项改为.NET Framework即可
 
- 在Unity中点击Lyf下的“Generate DialogueData”选项
-
-![image-20230413230753842](README.assets/image-20230413230753842.png)
-
-在确定你的生成路径保存数据和Excel文件读取路径后，点击生成数据按钮即可
-
-![image-20230413230910824](README.assets/image-20230413230910824.png)
-
-
-
-对话数据会以ScriptableObject的形式保存, 数据文件名即为Excel对应的sheet名
-
-![image-20230413231045703](README.assets/image-20230413231045703.png)
-
-### 2.对话系统使用
-
-对话系统的主要组成如下:
-
-![image-20230312225510934](README.assets/image-20230312225510934.png)
-
-分别解释每一个脚本的作用：
-
-### BaseDialogueController.cs
-
-- 作为DialogueController的基类，为子类提供存放对话数据的属性接口和通过自身对话数据开启对话的方法接口
-
-  以下是对外开放的属性和接口:
-
-| 方法名或属性名                       | 描述                         |
-| ------------------------------------ | ---------------------------- |
-| **DialogueData** currentDialogueData | 当前的对话信息               |
-| protected void **OpenDialogue**()    | 以当前挂载的对话信息开启对话 |
-
-### DialogueController.cs
-
-- 【使用方法】：将需要触发对话的GameObject挂载此脚本，设置好该对象对应的对话数据和触发方法即可，
-
-![image-20230312230341340](README.assets/image-20230312230341340.png)
-
-上述例子中我们为GameObject挂载了该脚本，设置了该对象的对话数据，在介绍下面的脚本内容的时候我们会讲自定义触发条件
-
-- 继承于BaseDialogueController，为挂载对象提供任意的触发对话的方法(需自己编写自定义触发条件)
-
-**【注意！！！】**对于触发条件不同的物体，你有两种办法：
-
-- 新建多个不同的脚本分别挂载，只要它是继承于BaseDialogueController即可，每个脚本单独设置它的触发方法（简单快捷，但是会导致脚本数增加）
-- 统一使用相同的DialogueController脚本，在此脚本中通过Tag或者name来区分不同的物体，使其单独触发，下面给出示例（详细注释，不多赘述）
+### 2. API介绍
 
 ```c#
-// 基类含有属性currentDialogueData, 表示挂载该脚本的物体要传输对话内容信息
-// 基类含有方法OpenDialogue, 可以使用该脚本中的对话数据开启对话
-public class DialogueController : BaseDialogueController
+// 用于表示成员变量相关信息的结构体
+public struct MemberStruct
 {
-    private void Update()
-    {
-        // 若挂载对象名为“NPC1”的时候，按下A键开启对话
-        if (gameObject.name == "NPC1" && Input.GetKeyDown(KeyCode.A))
-        {
-            OpenDialogue();
-        }
+    public readonly string MemberType;	// 成员变量类型
+    public readonly string MemberName;	// 成员变量名
+    public readonly bool IsPublic;	// 是否为公有属性
 
-        // 若挂载对象名为“NPC3”的时候，按下B键开启对话
-        if (gameObject.name == "NPC3" && Input.GetKeyDown(KeyCode.B))
-        {
-            OpenDialogue();
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
+    // 有参构造函数
+    public MemberStruct(string memberType, string memberName, bool isPublic = true)
     {
-        // 若挂载对象名为“NPC2”的时候，进入触发器开启对话
-        if (gameObject.name == "NPC2" && other.CompareTag("Player"))
-        {
-            OpenDialogue();
-        }
+        MemberName = memberName;
+        MemberType = memberType;
+        IsPublic = isPublic;
     }
+}
+```
+
+```c#
+public static void CreateClass(string className,	// 类名
+                               List<MemberStruct> members,	// 类成员变量列表
+                               string savePathFolder = "Assets/Scripts/Generation", // 代码保存文件夹(不包括类名)
+            				   string classNamespace = "DefaultNameSpace",	// 代码命名空间
+                               string baseClassName = null,	// 基类(为null表示不继承)
+                               List<string> reference = null,	// using引用目录,默认含有System和UnityEngine和System.Collections.Generic
+                               bool serializable = false) // 是否添加标签[System.Serializable]
+```
+
+```c#
+public static void CreateEnum(string enumName,	// 类名
+                              List<string> enumMembers,	// 枚举成员列表
+                              string savePathFolder = "Assets/Scripts/Generation",	// 代码保存文件夹(不包括枚举类名)
+            				  string enumNamespace = "DefaultNameSpace")	// 代码命名空间
+```
+
+### 3. 具体使用案例
+
+```c#
+public class Example
+{
+    // 生成枚举代码
+    public static void TestGenerateEnum()
+    {
+        var members = new List<string>
+        {
+            "Test1",
+            "Test2",
+            "Test3"
+        };
+        CodeGenerator.CreateEnum("TestEnum", members, "Assets/Scripts/Generation", typeof(Example).Namespace);
+    }
+     
+    // 生成类代码
+    public static void TestGenerateClass()
+        {
+            // 生成代码
+            var members = new List<MemberStruct>
+            {
+                new("int", "TestInt"),
+                new("string", "TestString"),
+                new("float", "TestFloat"),
+                new ("int[]", "TestIntArray"),
+                new ($"{typeof(Example).Namespace}.TestEnum", "TestEnum"),
+            };
+            CodeGenerator.CreateClass("TestClass", members, "Assets/Scripts/Generation",typeof(Example).Namespace, "MonoBehaviour");
+        }
 }
 ```
 
 
 
-### DialogueData.cs
+## (二) Excel工具包
 
-- 该脚本表示对话数据，继承于ScriptableObject，第一步中生成的数据类型即为此类，类里包含该对话数据的对话列表
+### 1. 对Excel表的格式要求
 
-![image-20230312231934018](README.assets/image-20230312231934018.png)
+- 第一行为表格描述
+- 第二行为成员变量名
+- 第三行为成员变量类型(若为枚举类型,则格式Enum:枚举名(枚举1,枚举2)即可, 其中不允许有多余空格), 若有多个选项请使用类似int[]的格式且内容里多个选项用逗号隔开,不允许有多余空格
+- 第四行为该变量的描述(该行可以为空, 成员变量名和类型不允许为空)
 
-### DialogueManager.cs
+举例说明:
 
-- 该系统的管理者，该对话系统的核心脚本，采用单例模式，控制对话的显示，隐藏，更新
-- 提供各种组件的接口，详细注释，在此不多赘述
+![image-20240207141006277](README.assets/image-20240207141006277.png)
 
-![image-20230312233103745](README.assets/image-20230312233103745.png)
+### 2. 使用方法
 
-对外开放的函数接口:
+```c#
+[MenuItem("Lyf/ExcelKit/工具包界面")]
+```
 
-| 函数名                                              | 参数解释           | 功能解释                           |
-| --------------------------------------------------- | ------------------ | ---------------------------------- |
-| public void **SetDialogueData**(DialogueData other) | 将要更新的对话数据 | 设置对话数据, 打开对话面板开启对话 |
+在编辑器窗口上方菜单栏中选择Lyf栏的ExcelKit的工具包界面, 将会弹出一个设置界面
 
-下面是测试用的挂载信息:
+![image-20240207141443225](README.assets/image-20240207141443225.png)
 
-【注】对话信息这一栏无需填写，SetDialogueData函数会为它赋值的
+设置好相关信息后点击生成代码, 会自动生成该表对应的枚举类, 行类(保存一行数据的类)以及表类(保存整个表数据的类), 以该默认设置数据和上述Excel表为例, 会在Asset/Scripts/Generation文件夹中生成两个枚举类,一个行类,一个表类:
 
-![image-20230312234335552](README.assets/image-20230312234335552.png)
+![image-20240207141930108](README.assets/image-20240207141930108.png)
 
-### PieceData.cs
-
-- 单条对话数据，成员变量和Excel表的每一列一一对应
-
-![image-20230327234642115](README.assets/image-20230327234642115.png)
+生成代码文件后, 点击生成数据按钮, 会在指定路径下生成对应的ScriptableObject数据文件(具体类型为生成的表类), 每个数据文件对应Excel文件中的一个Sheet, 名字也一一对应:  <img src="README.assets/image-20240207142320652.png" alt="image-20240207142320652"  /><img src="README.assets/image-20240207142349271.png" alt="image-20240207142349271" style="zoom:50%;" />
 
 
 
-## (二) 存档系统
+生成代码时会生成一个对应的函数, 若你删除了生成的代码文件后出现报错, 可以在ExcelKit目录中点击"恢复被修改的代码文件"按钮来还原为初始函数避免报错
+
+
+
+## (三) 存档系统
 
 ### 1.存档模式接口
 
@@ -215,7 +209,7 @@ public class SaveManager : GlobalSingleton<SaveManager> // GlobalSingleton是场
 
 #### 具体使用案例
 
-创建一个PlayerData类作为当前需要保存的信息类
+创建一个PlayerData类(或结构体)作为当前需要保存的信息类
 
 ```C#
 [Serializable]
@@ -323,7 +317,7 @@ private void OnDestroy()
 
 
 
-## (三) 单例系统
+## (四) 单例系统
 
 | 名称            | 类型      | 作用                                         |
 | --------------- | --------- | -------------------------------------------- |
@@ -332,7 +326,11 @@ private void OnDestroy()
 | SceneSingleton  | class     | 场景内单例,继承MonoBehavior,切换场景后会销毁 |
 | GlobalSingleton | class     | 全局单例,继承MonoBehavior,切换场景不会销毁   |
 
-## (四) 对象池系统
+
+
+## (五) 对象池系统
+
+*[Bug提示:] 改变生成对象的父节点会出现bug, 之后有时间再修*
 
 1. 通用单例模式,无需挂载到GameObject上,使用ObjectPool.Instance来获取单例
 
@@ -340,7 +338,7 @@ private void OnDestroy()
 
 3. 对外提供如下方法
 
-| 方法                                                         | 描述                                                         |
+| 提供方法                                                     | 描述                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | public GameObject **Allocate** (GameObject prefab)           | 从对应的对象池拿出对象                                       |
 | public void **Recycle**  (GameObject prefab)                 | 将对象回收到对应的对象池中                                   |
@@ -348,6 +346,54 @@ private void OnDestroy()
 | public void **ClearAllPool**  (bool containActive = false)   | 清空所有对象池中的对象,containActive为true时会销毁当前处于激活状态的对象 |
 
 
-4. 在场景中创建的对象池系统层级结构如下: ParentPool为对象池父物体(自动生成), 为每类对象提供单独的对象池(自动创建),名为"${prefabs.name} + Pool"
+4. 具体案例: 
+
+   ```c#
+   public class Example : MonoBehaviour
+   {
+       public GameObject[] prefabs;
+       private void Update()
+       {
+           // 按A生成一个Cube
+           if (Input.GetKeyDown(KeyCode.A))
+           {
+               var cube = ObjectPool.Instance.Allocate(prefabs[0]);
+               cube.transform.position = Vector3.zero;
+           }
+           // 按B生成一个Sphere
+           if (Input.GetKeyDown(KeyCode.B))
+           {
+               var sphere = ObjectPool.Instance.Allocate(prefabs[1]);
+               sphere.transform.position = Vector3.zero;
+           }
+           // 按C生成一个Capsule
+           if (Input.GetKeyDown(KeyCode.C))
+           {
+               var capsule = ObjectPool.Instance.Allocate(prefabs[2]);
+               capsule.transform.position = Vector3.zero;
+           }
+           
+           // 按D回收全部Cube
+           if (Input.GetKeyDown(KeyCode.D))
+           {
+               ObjectPool.Instance.ClearPool(prefabs[0].name);
+           }
+           // 按E回收全部对象
+           if (Input.GetKeyDown(KeyCode.E))
+           {
+               ObjectPool.Instance.ClearAllPool(true);
+           }
+       }
+   }
+   ```
+
+5. 在场景中创建的对象池系统层级结构如下: ParentPool为对象池父物体(自动生成), 为每类对象提供单独的对象池(自动创建),名为"${prefabs.name} + Pool"
 
    ![image-20230410231453941](README.assets/image-20230410231453941.png)
+
+## (六) Hierarchy窗口美化包
+
+导入Lyf/Utils/Editor文件夹后会自动生效,在Hierarchy窗口会显示该GameObject挂载的组件, 效果如下: ![image-20240207143107094](README.assets/image-20240207143107094.png)
+
+点击对应的图标可以直接进行更改:  <img src="README.assets/image-20240207143146541.png" alt="image-20240207143146541" style="zoom: 67%;" />
+

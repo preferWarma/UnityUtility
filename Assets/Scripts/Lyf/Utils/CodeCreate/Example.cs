@@ -17,7 +17,7 @@ namespace Lyf.Utils.CodeCreate
                 new ("int[]", "TestIntArray"),
                 new ($"{typeof(Example).Namespace}.TestEnum", "TestEnum"),
             };
-            CodeGenerator.CreateClass("TestClass", members, "Assets/Scripts/Generation", "MonoBehaviour", typeof(Example).Namespace);
+            CodeGenerator.CreateClass("TestClass", members, "Assets/Scripts/Generation",typeof(Example).Namespace, "MonoBehaviour");
         }
         
         // 生成枚举代码

@@ -14,11 +14,12 @@ namespace Lyf.ExcelKit.Editor
         private string _codeSavePath = "Assets/Scripts/Generation";
         private string _rowClassName = "Test_RowClass";
         private string _tableClassName = "Test_TableClass";
+        private string _codeNameSpace = "Generation";
         
         [MenuItem("Lyf/ExcelKit/工具包界面")]
         public static void ShowWindow()
         {
-            GetWindow<OpenWindow>("Generate DialogueData Window");
+            GetWindow<OpenWindow>("工具包界面");
         }
 
         private void OnGUI()
@@ -67,6 +68,7 @@ namespace Lyf.ExcelKit.Editor
             
             _rowClassName = EditorGUILayout.TextField("行数据类名: ", _rowClassName);
             _tableClassName = EditorGUILayout.TextField("表格数据类名: ", _tableClassName);
+            _codeNameSpace = EditorGUILayout.TextField("代码命名空间: ", _codeNameSpace);
 
             GUILayout.Space(20); // 空行, 避免按钮太紧凑
             
@@ -170,7 +172,7 @@ namespace Lyf.ExcelKit.Editor
                 // 获取第一个表格的数据生成代码
                 var classNames = ExcelHelper.GenerateClassAndEnumCode(excelData.First().Value,
                     "Assets/Scripts/Generation",
-                    _rowClassName, _tableClassName, "Generation");
+                    _rowClassName, _tableClassName, _codeNameSpace);
                 // 修改生成数据的代码
                 ScriptableDataGenerate.ModifyExecuteMethod(classNames[0], classNames[1]);
                 if (EditorUtility.DisplayDialog("生成成功", "代码生成成功", "OK"))
