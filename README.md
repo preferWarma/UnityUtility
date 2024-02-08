@@ -330,19 +330,21 @@ private void OnDestroy()
 
 ## (五) 对象池系统
 
-*[Bug提示:] 改变生成对象的父节点会出现bug, 之后有时间再修*
-
 1. 通用单例模式,无需挂载到GameObject上,使用ObjectPool.Instance来获取单例
 
-2. 扩容方式为:初始化容量为10, 后续采用以10为递增的扩容方式
+2. 扩容方式为:初始化容量为10, 后续采用以5为递增的扩容方式
 
 3. 对外提供如下方法
 
 | 提供方法                                                     | 描述                                                         |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| public GameObject **Allocate** (GameObject prefab)           | 从对应的对象池拿出对象                                       |
+| public void **SetInitialPoolCount**(int count)               | 设置对象池初始化时的容量                                     |
+| public void **SetAddCount**(int count)                       | 设置对象池扩容时的扩容大小                                   |
+| public GameObject **Allocate** (GameObject prefab, Action<GameObject> callback = null) | 从对应的对象池拿出对象并返回, callback为拿出对象后的回调函数 |
 | public void **Recycle**  (GameObject prefab)                 | 将对象回收到对应的对象池中                                   |
+| public void **ExpandPool** (GameObject prefab)               | 扩容已经存在的指定的对象池                                   |
 | public void **ClearPool** (string prefabName, bool containActive = false) | 清空指定对象池中的对象, containActive为true时会销毁当前处于激活状态的对象 |
+| public void **ClearPool**(GameObject prefab, bool containActive = false) | 清空指定对象池中的对象, containActive为true时会销毁当前处于激活状态的对象 |
 | public void **ClearAllPool**  (bool containActive = false)   | 清空所有对象池中的对象,containActive为true时会销毁当前处于激活状态的对象 |
 
 
@@ -357,29 +359,46 @@ private void OnDestroy()
            // 按A生成一个Cube
            if (Input.GetKeyDown(KeyCode.A))
            {
-               var cube = ObjectPool.Instance.Allocate(prefabs[0]);
-               cube.transform.position = Vector3.zero;
+               var cube = ObjectPool.Instance.Allocate(prefabs[0], obj =>
+               {
+                   // Cube设置为左上角
+                   obj.transform.position = new Vector3(-7, 3, 0);
+                   obj.transform.SetParent(transform);
+               });
            }
            // 按B生成一个Sphere
            if (Input.GetKeyDown(KeyCode.B))
            {
-               var sphere = ObjectPool.Instance.Allocate(prefabs[1]);
-               sphere.transform.position = Vector3.zero;
+               var sphere = ObjectPool.Instance.Allocate(prefabs[1], obj =>
+   			{
+   				// Sphere设置为右上角
+   				obj.transform.position = new Vector3(7, 3, 0);
+   			});
            }
            // 按C生成一个Capsule
            if (Input.GetKeyDown(KeyCode.C))
            {
-               var capsule = ObjectPool.Instance.Allocate(prefabs[2]);
-               capsule.transform.position = Vector3.zero;
+               var capsule = ObjectPool.Instance.Allocate(prefabs[2], obj =>
+   			{
+   				// Capsule设置为中心
+   				obj.transform.position = new Vector3(0, 0, 0);
+   			});
            }
-           
-           // 按D回收全部Cube
+   
+           // 按D回收全部Cube(不包括已经激活)
            if (Input.GetKeyDown(KeyCode.D))
            {
-               ObjectPool.Instance.ClearPool(prefabs[0].name);
+               ObjectPool.Instance.ClearPool(prefabs[0]);
            }
-           // 按E回收全部对象
+   
+           // 按E收回所有Sphere(包括已经激活)
            if (Input.GetKeyDown(KeyCode.E))
+           {
+               ObjectPool.Instance.ClearPool(prefabs[1], true);
+           }
+   
+           // 按F回收全部对象(包括已经激活)
+           if (Input.GetKeyDown(KeyCode.F))
            {
                ObjectPool.Instance.ClearAllPool(true);
            }

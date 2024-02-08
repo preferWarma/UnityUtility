@@ -12,7 +12,7 @@ namespace Lyf.ObjectPool
         private static int _addCount = 5; // 每次增加的对象数量
 
         private readonly Dictionary<string, ObjectPoolData> _objectPoolDataDic = new();
-        private readonly GameObject _parentPool = new("ParentObjectPool");   // 所有对象池的父物体
+        private readonly GameObject _parentPool = new("ParentPool");   // 所有对象池的父物体
 
         public void SetInitialPoolCount(int count) => _initialPoolCount = count; // 设置初始对象池大小
         public void SetAddCount(int count) => _addCount = count; // 设置每次增加的对象数量
