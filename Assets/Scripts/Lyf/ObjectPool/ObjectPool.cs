@@ -1,42 +1,46 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Lyf.Utils.Singleton;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Lyf.ObjectPool
 {
     public class ObjectPool : Singleton<ObjectPool>
     {
-        private const int InitialPoolCount = 10; // 初始对象池大小
-        private const int AddCount = 5; // 每次增加的对象数量
+        private static int _initialPoolCount = 10; // 初始对象池大小
+        private static int _addCount = 5; // 每次增加的对象数量
 
-        private readonly Dictionary<string, Queue<GameObject>> _objectPools = new(); // key: prefab 名字, value: prefabs对应的对象池
-        private readonly Dictionary<string, int> _poolMaxCountDic = new(); // key: prefab 名字, value: prefabs对应的对象池的当前最大数量
-        private GameObject _parentPool;   // 所有对象池的父物体
+        private readonly Dictionary<string, ObjectPoolData> _objectPoolDataDic = new();
+        private readonly GameObject _parentPool = new("ParentObjectPool");   // 所有对象池的父物体
+
+        public void SetInitialPoolCount(int count) => _initialPoolCount = count; // 设置初始对象池大小
+        public void SetAddCount(int count) => _addCount = count; // 设置每次增加的对象数量
 
         /// <summary>
-        /// 从对象池拿出对象
+        /// 从对象池取出一个对象
         /// </summary>
-        /// <returns></returns>
-        public GameObject Allocate(GameObject prefab)
+        public GameObject Allocate(GameObject prefab, Action<GameObject> callback = null)
         {
-            // 如果该对象池不存在或者该对象池中没有可以分配的对象了
-            if (!_objectPools.ContainsKey(prefab.name) || _objectPools[prefab.name].Count == 0)
+            var prefabName = prefab.name;
+
+            // 如果对象池中没有该对象对应的根节点, 则初始化一个
+            if (!_objectPoolDataDic.TryGetValue(prefabName, out var poolData))
             {
-                if (!_parentPool)
-                {
-                    _parentPool = new GameObject("ParentPool");   // 创建一个对象池的父物体
-                }
-                var childPool = _parentPool.transform.Find(prefab.name + "Pool");   // 查找父对象池中是否有对应的子物体对象池
-                if (!childPool)
-                {
-                    childPool = new GameObject(prefab.name + "Pool").transform;   // 创建该对象池的子物体对象池
-                    childPool.SetParent(_parentPool.transform);   // 将该对象池的子物体对象池设置为对象池的父物体
-                }
-                FillPool(prefab);   // 填充该对象对应的对象池
+                poolData = InitializePool(prefab);
             }
-            var res = _objectPools[prefab.name].Dequeue();   // 从对象池中取出一个对象
-            res.SetActive(true);
-            return res;
+            
+            // 如果对象池中没有足够的对象, 则扩容
+            if (poolData.AvailableObjects.Count == 0)
+            {
+                ExpandPool(prefab);
+            }
+
+            var obj = poolData.AvailableObjects.Dequeue();
+            obj.SetActive(true);
+
+            callback?.Invoke(obj);   // 回调函数
+            return obj;
         }
 
         /// <summary>
@@ -44,101 +48,103 @@ namespace Lyf.ObjectPool
         /// </summary>
         public void Recycle(GameObject prefab)
         {
-            var name = prefab.name.Replace("(Clone)", "");   // 去掉对象名字中的(Clone)
-            if (!_objectPools.ContainsKey(name))
+            var prefabName = prefab.name;
+
+            if (!_objectPoolDataDic.TryGetValue(prefabName, out var poolData))
             {
-                _objectPools.Add(name, new Queue<GameObject>());   // 如果该对象池不存在则创建一个新的对象池
+                Debug.LogError($"未找到 {prefabName} 的对象池数据");
+                return;
             }
-            _objectPools[name].Enqueue(prefab);   // 将对象放入对象池
+
+            poolData.AvailableObjects.Enqueue(prefab);
             prefab.SetActive(false);
         }
         
-        private void FillPool(GameObject prefab) // 填充该对象对应的对象池, 采用固定扩容策略
+        public void ClearPool(string prefabName, bool containActive = false)    // 清空对象池
         {
-            var parent = _parentPool.transform.Find(prefab.name + "Pool");
-            // 如果该对象对应的对象池不存在则创建一个新的对象池与之对应
-            if (!_objectPools.ContainsKey(prefab.name))
+            if (_objectPoolDataDic.TryGetValue(prefabName, out var poolData))
             {
-                _objectPools.Add(prefab.name, new Queue<GameObject>());
-                // 初始容量设置
-                for (var i = 0; i < InitialPoolCount; i++)
+                for (var i = poolData.AllObjects.Count - 1; i >= 0; i--)
                 {
-                    var obj = Object.Instantiate(prefab, parent, true);
-                    Recycle(obj);
+                    var obj = poolData.AllObjects[i];
+                    if (obj.activeSelf && !containActive) continue; // 如果不包含激活的对象, 则跳过
+                    Object.Destroy(obj);
+                    poolData.AllObjects.RemoveAt(i);
                 }
-                _poolMaxCountDic.Add(prefab.name, InitialPoolCount);
-                Debug.Log($"已创建{prefab.name}Pool对象池, 初始容量设置为 {InitialPoolCount}");
-            }
 
-            else // 存在对象池则扩容
-            {
-                if (_poolMaxCountDic[prefab.name] == 0) // 如果之前清空了该对象池,则首次填充的时候,容量设置为初始值
-                {
-                    _poolMaxCountDic[prefab.name] = InitialPoolCount;
-                    for (var i = 0; i < _poolMaxCountDic[prefab.name]; i++)
-                    {
-                        var obj = Object.Instantiate(prefab, parent, true);
-                        Recycle(obj);
-                    }
-                    Debug.Log($"已重新初始化{prefab.name}Pool对象池, 当前容量为 {InitialPoolCount}");
-                }
-                else // 如果之前没有清空该对象池,则扩容
-                {
-                    for (var i = 0; i < AddCount ; i++)
-                    {
-                        var obj = Object.Instantiate(prefab, parent, true);
-                        Recycle(obj);
-                    }
-                    _poolMaxCountDic[prefab.name] += AddCount;
-                    Debug.Log($"已扩容{prefab.name}Pool对象池, 当前容量为 {_poolMaxCountDic[prefab.name]}");
-                }
-            }
+                // 清空对象池数据, 避免空引用异常
+                poolData.AvailableObjects.Clear();
 
+                Debug.Log(containActive ? $"已清空对象池 {prefabName}Pool 中的全部对象" : $"已清空对象池 {prefabName}Pool 中未激活的全部对象");
+            }
         }
         
-        /// <summary>
-        /// 清空指定对象池中的对象
-        /// </summary>
-        /// <param name="prefabName"> 对象名 </param>
-        /// <param name="containActive"> 是否清空当前已经激活的对象 </param>
-        public void ClearPool(string prefabName, bool containActive = false)
-        {
-                if (_objectPools.ContainsKey(prefabName))
-                {
-                    var childPool = _parentPool.transform.Find(prefabName + "Pool");
-                    for (var i = 0; i < childPool.childCount; i++)
-                    {
-                        var child = childPool.GetChild(i);
-                        if (!child.gameObject.activeSelf)
-                        {
-                            Object.Destroy(child.gameObject);
-                            _poolMaxCountDic[prefabName]--;
-                        }
-                        else if (containActive)
-                        {
-                            Object.Destroy(child.gameObject);
-                            _poolMaxCountDic[prefabName]--;
-                        }
-                    }
+        public void ClearPool(GameObject prefab, bool containActive = false) => ClearPool(prefab.name, containActive);    // 重载方法
 
-                    _objectPools[prefabName].Clear();
-                    Debug.Log(containActive ? $"已清空对象池 {prefabName}Pool中的全部对象" : $"已清空对象池 {prefabName}Pool中未激活的全部对象");
-                }
-            
-        }
-        
-        /// <summary>
-        /// 清空所有对象池中的对象
-        /// </summary>
-        /// <param name="containActive"> 是否清空当前已经激活的对象 </param>
         public void ClearAllPool(bool containActive = false)
         {
-            foreach (var pool in _objectPools)
+            var prefabNames = new List<string>(_objectPoolDataDic.Keys);
+            foreach (var prefabName in prefabNames)
             {
-                ClearPool(pool.Key, containActive);
+                ClearPool(prefabName, containActive);
+            }
+        }
+        
+        public void ExpandPool(GameObject prefab)  // 扩容对象池
+        {
+            var prefabName = prefab.name;
+            if (!_objectPoolDataDic.TryGetValue(prefabName, out var poolData))
+            {
+                Debug.LogError($"未找到 {prefabName} 的对象池数据");
+                return;
             }
 
-            Debug.Log(containActive ? "已清空所有对象池中的全部对象" : "已清空所有对象池中未激活的全部对象");
+            var parent = _parentPool.transform.Find(prefabName + "Pool");
+
+            for (var i = 0; i < _addCount; i++)
+            {
+                var obj = Object.Instantiate(prefab, parent, true);
+                obj.name = obj.name.Replace("(Clone)", string.Empty);
+                poolData.AddObject(obj);
+                obj.SetActive(false);
+            }
+
+            Debug.LogFormat("已扩容 {0} 对象池，当前容量为 {1}", prefabName, poolData.AllObjects.Count);
+        }
+        
+        // 其他方法...(以后想到了再说)
+
+        private ObjectPoolData InitializePool(GameObject prefab)  // 创建并初始化一个不存在的对象池
+        {
+            var prefabName = prefab.name.Replace("(Clone)", string.Empty);
+            var rootObj = new GameObject(prefabName + "Pool");  // 创建对象池的父物体
+            rootObj.transform.SetParent(_parentPool.transform);
+            
+            var poolData = new ObjectPoolData();
+            _objectPoolDataDic[prefabName] = poolData;
+
+            for (var i = 0; i < _initialPoolCount; i++)
+            {
+                var obj = Object.Instantiate(prefab, rootObj.transform, true);
+                obj.name = obj.name.Replace("(Clone)", string.Empty);
+                poolData.AddObject(obj);
+                obj.SetActive(false);
+            }
+
+            Debug.Log($"已初始化 {prefabName} 对象池，初始容量为 {_initialPoolCount}");
+            return poolData;
+        }
+        
+        private class ObjectPoolData
+        {
+            public Queue<GameObject> AvailableObjects { get; } = new();
+            public List<GameObject> AllObjects { get; } = new();
+            
+            public void AddObject(GameObject obj)
+            {
+                AllObjects.Add(obj);
+                AvailableObjects.Enqueue(obj);
+            }
         }
     }
 }
