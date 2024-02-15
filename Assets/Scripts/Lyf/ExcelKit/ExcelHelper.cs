@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using ExcelDataReader;
 using Lyf.Utils.CodeCreate;
 using UnityEngine;
@@ -55,7 +57,7 @@ namespace Lyf.ExcelKit
             var excelData = ReadExcel(excelPath);
             foreach (var (sheetName, dataTable) in excelData)
             {
-                var rowClassList = ScriptableDataGenerate.ConvertDataTableToList<T>(dataTable);
+                var rowClassList = ConvertDataTableToRowClassList<T>(dataTable);
                 res.Add(sheetName, rowClassList);
             }
             return res;
@@ -107,6 +109,73 @@ namespace Lyf.ExcelKit
             
             // 返回可调用的行类名和表类名
             return new[] {$"{codeNameSpace}.{rowClassName}", $"{codeNameSpace}.{tableClassName}"};
+        }
+        
+        /// <summary>
+        /// 将DataTable转换为List类型
+        /// </summary>
+        /// <param name="dataTable">表格数据</param>
+        /// <typeparam name="T">表示每一行的类</typeparam>
+        /// <returns></returns>
+        private static List<T> ConvertDataTableToRowClassList<T>(DataTable dataTable) where T : new()
+        {
+            var rowDataDataList = new List<T>();
+            for (var i = 3; i < dataTable.Rows.Count; i++)
+            {
+                var row = dataTable.Rows[i];
+                
+                var rowData = new T();
+                var fields = typeof(T).GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+                for (var j = 0; j < fields.Length; j++)
+                {
+                    var field = fields[j];
+                    var fieldName = field.Name; // 字段名
+                    var fieldType = field.FieldType;    // 字段类型
+                    var fieldValue = row[j];    // 字段值
+                    
+                    if (fieldValue == DBNull.Value) continue;
+                    
+                    if (fieldType == typeof(int))
+                    {
+                        field.SetValue(rowData, Convert.ToInt32(fieldValue));
+                    }
+                    else if (fieldType == typeof(string))
+                    {
+                        field.SetValue(rowData, fieldValue.ToString());
+                    }
+                    else if (fieldType.IsEnum)
+                    {
+                        if (Enum.TryParse(field.FieldType, fieldValue.ToString(), out var result))
+                        {
+                            field.SetValue(rowData, result);
+                        }
+                        else
+                        {
+                            Debug.LogError($"{fieldType}转换失败");
+                        }
+                    }
+                    else if (fieldType == typeof(GameObject))
+                    {
+                        field.SetValue(rowData, Resources.Load<GameObject>(fieldValue.ToString()));
+                    }
+                    else if (fieldType == typeof(int[]))
+                    {
+                        field.SetValue(rowData, Array.ConvertAll(fieldValue.ToString().Split(','), int.Parse));
+                    }
+                    else if (fieldType == typeof(string[]))
+                    {
+                        field.SetValue(rowData, fieldValue.ToString().Split(','));
+                    }
+                    else if (fieldType == typeof(float[]))
+                    {
+                        field.SetValue(rowData, Array.ConvertAll(fieldValue.ToString().Split(','), float.Parse));
+                    }
+                }
+                
+                rowDataDataList.Add(rowData);
+            }
+
+            return rowDataDataList;
         }
     }
 }

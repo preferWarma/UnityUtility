@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.IO;
 using System.Reflection;
 using UnityEditor;
@@ -10,73 +8,6 @@ namespace Lyf.ExcelKit
 {
     public class ScriptableDataGenerate : MonoBehaviour
     {
-        /// <summary>
-        /// 将DataTable转换为List类型
-        /// </summary>
-        /// <param name="dataTable">表格数据</param>
-        /// <typeparam name="T">表示每一行的类</typeparam>
-        /// <returns></returns>
-        public static List<T> ConvertDataTableToList<T>(DataTable dataTable) where T : new()
-        {
-            var rowDataDataList = new List<T>();
-            for (var i = 3; i < dataTable.Rows.Count; i++)
-            {
-                var row = dataTable.Rows[i];
-                
-                var rowData = new T();
-                var fields = typeof(T).GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-                for (var j = 0; j < fields.Length; j++)
-                {
-                    var field = fields[j];
-                    var fieldName = field.Name; // 字段名
-                    var fieldType = field.FieldType;    // 字段类型
-                    var fieldValue = row[j];    // 字段值
-                    
-                    if (fieldValue == DBNull.Value) continue;
-                    
-                    if (fieldType == typeof(int))
-                    {
-                        field.SetValue(rowData, Convert.ToInt32(fieldValue));
-                    }
-                    else if (fieldType == typeof(string))
-                    {
-                        field.SetValue(rowData, fieldValue.ToString());
-                    }
-                    else if (fieldType.IsEnum)
-                    {
-                        if (Enum.TryParse(field.FieldType, fieldValue.ToString(), out var result))
-                        {
-                            field.SetValue(rowData, result);
-                        }
-                        else
-                        {
-                            Debug.LogError($"{fieldType}转换失败");
-                        }
-                    }
-                    else if (fieldType == typeof(GameObject))
-                    {
-                        field.SetValue(rowData, Resources.Load<GameObject>(fieldValue.ToString()));
-                    }
-                    else if (fieldType == typeof(int[]))
-                    {
-                        field.SetValue(rowData, Array.ConvertAll(fieldValue.ToString().Split(','), int.Parse));
-                    }
-                    else if (fieldType == typeof(string[]))
-                    {
-                        field.SetValue(rowData, fieldValue.ToString().Split(','));
-                    }
-                    else if (fieldType == typeof(float[]))
-                    {
-                        field.SetValue(rowData, Array.ConvertAll(fieldValue.ToString().Split(','), float.Parse));
-                    }
-                }
-                
-                rowDataDataList.Add(rowData);
-            }
-
-            return rowDataDataList;
-        }
-        
         /// <summary>
         /// 通过Excel数据生成多个ScriptableObject数据
         /// </summary>
@@ -104,13 +35,35 @@ namespace Lyf.ExcelKit
 
             AssetDatabase.SaveAssets(); //保存
         }
-
-        private static void CreateFoldersIfNotExist(string path)    // 递归创建文件夹
+        
+        /// <summary>
+        /// 恢复被修改的代码文件
+        /// </summary>
+        [MenuItem("Lyf/ExcelKit/恢复被修改的代码文件")]
+        public static void RestoreCodeFile()
         {
-            var directoryPath = Path.GetDirectoryName(path);
-            if (Directory.Exists(directoryPath)) return;
-            if (directoryPath != null) Directory.CreateDirectory(directoryPath);
-            else throw new Exception("路径为空");
+            try 
+            {
+                // 读取Template_OpenWindow_Designer.txt文件
+                const string filePath = "Assets/Scripts/Lyf/ExcelKit/Editor/Template_OpenWindow_Designer.txt";
+                var fileContent = File.ReadAllText(filePath);
+
+                // 将文件内容部分替换
+                var replaceContent = fileContent.Replace("@1", "void").Replace("@2", "void");
+            
+                // 写入文件
+                const string savePath = "Assets/Scripts/Lyf/ExcelKit/Editor/OpenWindow.Designer.cs";
+            
+                File.WriteAllText(savePath, replaceContent);
+                
+                Debug.Log("恢复成功");
+                AssetDatabase.Refresh();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("恢复失败");
+                Debug.LogError(e);
+            }
         }
         
         /// <summary>
@@ -143,34 +96,12 @@ namespace Lyf.ExcelKit
             }
         }
         
-        /// <summary>
-        /// 恢复被修改的代码文件
-        /// </summary>
-        [MenuItem("Lyf/ExcelKit/恢复被修改的代码文件")]
-        public static void RestoreCodeFile()
+        private static void CreateFoldersIfNotExist(string path)    // 递归创建文件夹
         {
-            try 
-            {
-                // 读取Template_OpenWindow_Designer.txt文件
-                const string filePath = "Assets/Scripts/Lyf/ExcelKit/Editor/Template_OpenWindow_Designer.txt";
-                var fileContent = File.ReadAllText(filePath);
-
-                // 将文件内容部分替换
-                var replaceContent = fileContent.Replace("@1", "void").Replace("@2", "void");
-            
-                // 写入文件
-                const string savePath = "Assets/Scripts/Lyf/ExcelKit/Editor/OpenWindow.Designer.cs";
-            
-                File.WriteAllText(savePath, replaceContent);
-                
-                Debug.Log("恢复成功");
-                AssetDatabase.Refresh();
-            }
-            catch (Exception e)
-            {
-                Debug.LogError("恢复失败");
-                Debug.LogError(e);
-            }
+            var directoryPath = Path.GetDirectoryName(path);
+            if (Directory.Exists(directoryPath)) return;
+            if (directoryPath != null) Directory.CreateDirectory(directoryPath);
+            else throw new Exception("路径为空");
         }
     }
 }
