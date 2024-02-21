@@ -12,7 +12,7 @@ namespace Lyf.ObjectPool
         private static int _addCount = 5; // 每次增加的对象数量
 
         private readonly Dictionary<string, ObjectPoolData> _objectPoolDataDic = new();
-        private readonly GameObject _parentPool = new("ParentPool");   // 所有对象池的父物体
+        private GameObject _parentPool; // 所有对象池的父物体
 
         public void SetInitialPoolCount(int count) => _initialPoolCount = count; // 设置初始对象池大小
         public void SetAddCount(int count) => _addCount = count; // 设置每次增加的对象数量
@@ -67,6 +67,11 @@ namespace Lyf.ObjectPool
                 for (var i = poolData.AllObjects.Count - 1; i >= 0; i--)
                 {
                     var obj = poolData.AllObjects[i];
+                    if (!obj)
+                    {
+                        poolData.AllObjects.RemoveAt(i);
+                        continue;
+                    }
                     if (obj.activeSelf && !containActive) continue; // 如果不包含激活的对象, 则跳过
                     Object.Destroy(obj);
                     poolData.AllObjects.RemoveAt(i);
@@ -116,6 +121,12 @@ namespace Lyf.ObjectPool
 
         private ObjectPoolData InitializePool(GameObject prefab)  // 创建并初始化一个不存在的对象池
         {
+            if (!_parentPool)
+            {
+                _parentPool = new GameObject("ParentPool");
+                Object.DontDestroyOnLoad(_parentPool);
+            }
+            
             var prefabName = prefab.name.Replace("(Clone)", string.Empty);
             var rootObj = new GameObject(prefabName + "Pool");  // 创建对象池的父物体
             rootObj.transform.SetParent(_parentPool.transform);
